@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv='cache-control' content='no-cache' />
+    <meta http-equiv='expires' content='0' />
+    <meta http-equiv='pragma' content='no-cache' />
+    <title>Lot Easy</title>
+    
+    <link href="css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="css/styles.css" rel="stylesheet" media="screen">
+    <link href="css/theme.css" rel="stylesheet" media="screen">
+    <link href="css/fontello.css" rel="stylesheet" media="screen">
+	 <link href="css/jquery.autocomplete.css" rel="stylesheet" media="screen">
+	  <link href="css/jquery.autocomplete.thikbox.css" rel="stylesheet" media="screen">
+	
+	
+    <link rel="stylesheet" href="js/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen" />
+    
+     
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/plupload.full.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <!--<script src="http://code.jquery.com/jquery-1.9.1.js"></script>-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/url.js"></script>
+    <script type="text/javascript" src="js/vendoradmin-additemdetails.js"></script>
+	<script type="text/javascript" src="js/jquery.form.js"></script>
+	<script type="text/javascript" src="js/bigradiobutton.js"></script>
+    <script type="text/javascript" src="js/jquery-autocomplete/jquery.autocomplete.js"></script>
+	
+    	
+    <!--<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.3.css" />
+	<script src="js/jquery.mobile-1.4.3.js"></script>-->
+    <style>
+        /* responsive image */
+    /*.erb-image-wrapper img{
+    max-width:100% !important;
+    max-height:100% !important;
+    display:block;
+}*/
+        .ui-page
+        {
+            background: #eb6f20;
+        }
+        /* Only for this page these styles */
+        .add-plus:before
+        {
+            font-family: "fontello";
+            font-style: normal;
+            font-weight: normal;
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            text-align: center;
+            content: '\e811';
+            color: #fff;
+            background: #e8853a;
+            border-radius: 20px;
+        }
+        *{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none; 
+}
+textarea
+{
+    -webkit-user-select: auto !important;
+}
+        .add-min:before
+        {
+            font-family: "fontello";
+            font-style: normal;
+            font-weight: normal;
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            text-align: center;
+            content: '\e813';
+            color: #fff;
+            background: #e8853a;
+            border-radius: 20px;
+        }
+        
+        .per60
+        {
+            width: 50% !important;
+            float: left;
+            margin-right: 3% !important;
+            margin-top: 5px !important;
+        }
+        .per28
+        {
+            width: 35% !important;
+            float: left;
+            margin-right: 3% !important;
+            margin-top: 5px !important;
+        }
+        .add-plus, .add-min
+        {
+            width: 9%;
+            height: 35px;
+            float: left;
+            text-align: right;
+            margin-top: 15px;
+        }
+        
+        input[value]
+        {
+            color: #a9a9a9 !important;
+            padding-right: 20px;
+            -webkit-touch-callout: none !important;
+            -webkit-user-select: none !important;
+            -khtml-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
+        }
+    </style>
+
+
+</head>
+	
+	<script>
+		    document.addEventListener("deviceready", onDeviceReady, false);
+			var pictureSource;   // picture source
+            var destinationType; // sets the format of returned value	
+			function backButtonCallback()
+			{
+				   
+			}
+				
+			function onDeviceReady()
+			{
+
+				  pictureSource=navigator.camera.PictureSourceType;
+                  destinationType=navigator.camera.DestinationType;
+					
+					
+						document.addEventListener('backbutton', backButtonCallback, false);
+			}
+		</script>
+<body class="vendorBg">
+    <div class="DarkBg">
+        <!--Header Section-->
+        <header class="headerWrap">
+				<div class="tpLogoSection">
+                    <a class="tpBN-lt icon-left-open" id="homeiconback"  style="display:block !important"></a>
+					<a id="homeicon" class="tpBN-lt icon-home-1" ></a>	
+					<div class="tpPageHeading">
+					
+						<div class="inheadLogo" style="display: block;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">Lot Easy</div>
+					</div>
+					<a id="logout" class="tpBN-rt icon-logout"></a>
+				</div>
+			</header>
+        <!--Time and Date Section-->
+        <section class="headSubDtls">
+				<ul>
+					<li class="theatreName"><label id="vendorname" title="Vendor Name">Vendor Name</label></li>
+					<li class="screenNo"><label id="locationname" title="Vendor Name" style="display: block;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">Location Name</label></li>
+					<li class="dateTime"><label id="vendorusername" title="Vendor Name">User Name</label></li>
+				</ul>
+			</section>
+        <!-- Content Section -->
+		
+			<div style="display:none"  class="alert alert-error alert_additemdetails">
+                <h4 id="errMsg">
+                    <strong>Error!</strong> The daily cronjob has failed.
+                </h4>
+                <a href="#" class="alert_close" title="close"></a>
+            </div>
+			<div style="display:none" class="alert alert-success">
+                <h4 id="successMsg">
+                    <strong>Succcess!</strong> The daily cronjob has suceeded.
+                </h4>
+                <a href="#" class="alert_close" title="close"></a>
+            </div>
+			
+        <div class="contentWrap_inner">
+		 
+            
+            <div class="vndadWrapper pull-left" style="padding: 20px;">
+                <div class="orders-details-wrap">
+                    <h4 class="h4Head text-uppercase text-center">
+                        Add Details</h4>
+					<b><label style="font-weight: bold;" id="hirarchytext">No Data</label></b>
+                    <div class="fields">
+                        <div id="itemdetails" class="addfieldsRow fieldsTable custom-fields">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td align="left" valign="middle" width="100%">
+                                        <label class="fieldHead">
+                                         Item Name</label><span class="required_red" aria-required="true">*</span>
+                                          <input id="item_id" placeholder="item_id" type="hidden">
+										 <input id="itemName" type="text"    placeholder="Item Name" onkeypress="return RestrictVarchar(this,event,25);">
+                                        <input id="vendoritemid" placeholder="Vendor_item_id" type="hidden">
+                                        <input id="vendorid" placeholder="vendorid" type="hidden">
+                                        <input id="cat_id" placeholder="categoryid" type="hidden">
+                                    </td>
+                                </tr>
+                                <tr><td align="left" valign="middle" width="100%">
+								   <table width="100%">
+								    <tr>
+                                    <td align="left" valign="middle" width="50%">
+                                        <div id="Availabilaty" class="aeAvailability" style="margin: 0px;">
+                                            <div class="watu">
+                                                <label class="pull-left tp_mrgin_mins3"><input id="chkAvailoabilaty" type="checkbox" class="radio bigcheck" name="Available" checked /></label>
+                                                <p>Item Available</p>
+                                            </div>
+                                        </div>
+                                    </td>
+									<td align="left" valign="middle" width="49%">
+                                        <div id="Availabilaty" class="aeAvailability" style="margin: 0px;">
+                                            <div class="watu">
+                                               <label class="pull-left tp_mrgin_mins3"><input id="chkNonVegetarian" type="checkbox" class="radio bigcheck" name="NonVegetarian"  /></label>
+                                               <p>Non Vegetarian</p>
+                                            </div>
+                                        </div>
+                                    </td>
+									</tr>
+									</table>
+									</td>
+                                </tr>
+								<!--<tr>
+                                    <td align="left" valign="middle" width="100%">
+                                        <div id="Availabilaty" class="aeAvailability" style="margin: 0px;">
+                                            <div class="watu">
+                                                <input id="chkNonVegetarian" type="checkbox" class="radio" name="NonVegetarian"  /><p>
+                                                    Non Vegetarian</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>-->
+                            </table>
+                        </div>
+                        <h6 class="dividHeading">
+                            Price and Discount</h6>
+                        <div id="itemcostdetails" class="addfieldsRow fieldsTable custom-fields">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+							 <tr >
+                                    <td align="left" valign="middle" width="33%" colspan="3">
+									<table width="50%" border="0" cellspacing="0" cellpadding="0">
+										<tr>
+										<td style="width:140px;">
+                                        <div class="aeAvailability" style="margin: 0px;">
+                                            <div class="watu">
+                                                <label class="pull-left tp_mrgin_mins3"><input type="radio" id="percentage" name="radio-choice-1" class="radio bigradio"></label><p>
+                                                  Percentage </p>
+                                            </div>
+                                        </div>
+										</td>
+										<td style="width:120px;">
+										 <div class="aeAvailability" style="margin: 0px;">
+                                            <div class="watu">
+                                                <label class="pull-left tp_mrgin_mins3"><input type="radio"  id="amount" name="radio-choice-1" class="radio bigradio"></label><p>
+                                                    Amount</p>
+                                            </div>
+                                        </div>
+										</td>
+										</tr>
+										</table>
+										
+                                    </td>
+                                    <td align="left" valign="middle" width="33%">
+                                       
+                                    </td> 
+                                    <td align="left" valign="middle" width="33%">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="middle" width="33%">
+                                        <label class="fieldHead">
+                                            Discount</label>
+                                        <input type="number" step="0.01" id="discount" onchange="CalculateSalesPrice();" onkeyup="CalculateSalesPrice();" onkeypress="return isFloatNumber(event);"  placeholder="">
+                                    </td>
+                                    <td align="left" valign="middle" width="33%">
+                                        <label class="fieldHead">
+                                            Cost</label><span class="required_red" aria-required="true">*</span>
+                                        <input type="number" step="0.01"  id="totcost"  onchange="CalculateSalesPrice();" onkeyup="CalculateSalesPrice();" onkeypress="return isFloatNumber(event);"  placeholder="0.00">
+                                    </td>
+                                    <td align="left" valign="middle" width="33%">
+                                        <label class="fieldHead">
+                                            Selling Price</label>
+                                        <input type="number" step="0.01" placeholder="0.00" id="sellingprice" onkeypress="return false;" onkeydown="return false;" onkeyup="return false;" class="lastCh" style="margin-right: 0px;">
+                                    </td>
+                                </tr>
+                               
+                            </table>
+                            <!--
+                                <section class="ae_itemcostdtls">
+								<input type="text" id="discount" placeholder="Discount" >
+								<input type="text" id="totcost" placeholder="Cost">
+								<input type="text" placeholder="Selling Price" id="sellingprice" class="lastCh" style="margin-right:0px;">
+								</section>
+                                <section class="aeAvailability">
+									<div class="watu"><input type="radio" id="percentage" name="radio-choice-1" class="radio"><p>Percentage</p></div>
+									<div class="watu"><input type="radio" id="amount" name="radio-choice-1" class="radio"><p>Amount</p></div>
+								</section>
+                            -->
+                        </div>
+                        <h6 class="dividHeading">
+                             Taxes and Charges</h6>
+                        <div id="itemtaxdetails" class="addfieldsRow">
+                            <div class="fieldsTable custom-fields">
+                                <table id="taxdetailstable" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr id="taxdetails-1">
+                                        <td align="left" valign="middle" width="33%">
+                                            <label id="taxlabel1" class="fieldHead">
+                                                VAT</label>
+                                            <input type="number" step="0.01" id="vat"  name="tax1"  onkeypress="return isFloatNumber(event);" placeholder="0.00" >
+                                        </td>
+                                        <td align="left" valign="middle" width="33%">
+                                            <label id="taxlabel2" class="fieldHead">
+                                                Service Tax</label>
+                                            <input type="number" step="0.01" id="servicetax" name="tax2"  onkeypress="return isFloatNumber(event);" placeholder="0.00">
+                                        </td>
+                                        <td align="left" valign="middle" width="33%">
+                                            <label id="taxlabel3" class="fieldHead">
+                                                Service Charge</label>
+                                            <input type="number" step="0.01" id="servicecharge" name="tax3"  onkeypress="return isFloatNumber(event);" placeholder="0.00">
+                                        </td>
+                                    </tr>
+                                    <tr id="taxdetails-2" >
+                                        <!-- <td align="left" valign="middle" width="33%">
+                                            <label class="fieldHead">
+                                                Surcharge</label>
+                                            <input type="text" id="surcharge" placeholder="Surcharge">
+                                        </td>-->
+                                        <td align="left" valign="middle" width="33%">
+                                            <label  id="taxlabel4"class="fieldHead">
+                                                Other Tax 1</label>
+                                            <input type="number" step="0.01" id="othertax1" name="tax4"  onkeypress="return isFloatNumber(event);" placeholder="0.00">
+                                        </td>
+                                        <td align="left" valign="middle" width="33%">
+                                            <label id="taxlabel5" class="fieldHead">
+                                                Other Tax 1</label>
+                                            <input type="number" step="0.01" id="othertax2" name="tax5"  onkeypress="return isFloatNumber(event);" placeholder="0.00">
+                                        </td>
+                                        <!--<td align="left" valign="middle" width="33%">
+                                        </td>-->
+                                    </tr>
+                                </table>
+                            </div>
+                            <!--
+                            <section class="vend-add-servicedtlsWrapper custom-fields">
+									<input type="text" id="vat" value="VAT  ">
+									<input type="text" id="servicetax" placeholder="Service Tax">
+									<input type="text" id="servicecharge" placeholder="Service Charge">
+								</section>
+                                -->
+                            <!--<section class="aeAvailability">
+									<div class="watu"><input type="radio" id="inclusive" name="radio-choice-2" class="radio"><p>Inclusive</p></div>
+									<div class="watu"><input type="radio" id="exclusive" name="radio-choice-2" class="radio"><p>Exclusive</p></div>
+								</section>-->
+                        </div>
+                        <!--
+                        <div id="itemtaxdetails1" class="addfieldsRow">
+                            <section class="vend-add-servicedtlsWrapper custom-fields">
+									<input type="text" id="othertax1" placeholder="Other Tax1">
+									<input type="text" id="othertax2" placeholder="Other Tax2">
+								
+								</section>-->
+                        <section class="aeAvailability" id="inclusiveexclusivetax">
+									<div class="watu"><input type="radio" id="inclusive" name="radio-choice-2" class="radio"><p>Inclusive</p></div>
+									<div class="watu"><input type="radio" id="exclusive" name="radio-choice-2" class="radio"><p>Exclusive</p></div>
+								</section>
+                        <!-- </div>-->
+                        <h6 class="dividHeading">
+                            Topping Details</h6>
+                        <div id="top1" class="addfieldsRow margin-t20 custom-fields">
+                            <div class="fieldsTable custom-fields">
+                                <table width="100%" id="tbltoppings" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td align="left" valign="middle" width="100%" colspan="3">
+                                            <label class="fieldHead">
+                                                Write Topping Name</label>
+                                            <input type="text" id="toppingbutton" onkeypress="return RestrictVarchar(this,event,100);" placeholder="Write Topping Name">
+                                        </td>
+                                    </tr>
+                                    <tr class="toppingRow">
+                                        <td align="left" valign="middle" width="45%">
+                                            <label class="fieldHead">
+                                                Add Topping</label>
+                                        </td>
+                                        <td align="left" valign="middle" width="45%">
+                                            <label class="fieldHead">
+                                                Cost</label>
+                                        </td>
+                                        <td align="left" valign="middle" width="10%">
+                                            <label class="fieldHead">
+                                                Action</label>
+                                        </td>
+                                    </tr>
+                                    <tr id="toppingrow-0" class="toppingRow">
+                                        <td align="left" valign="middle">
+                                            <input type="text"  onkeypress="return RestrictVarchar(this,event,15);" id="toptxt-0" class="topping" placeholder="Add Topping">
+											<datalist id="toppingslist">
+											
+											
+										</datalist>
+                                            <input type="hidden" id="topid-0" value="">
+                                        </td>
+                                        <td align="left" valign="middle">
+                                            <input type="number" id="topcost-0" onkeypress="return isNumber(event);"  placeholder="0">
+                                        </td>
+                                        <td align="left" id="topaction-0" valign="middle">
+                                            <a id="removerow-0" onclick="removetopping(this);" class="add-min"></a>
+                                        </td>
+                                    </tr>
+                                    <tr id="toppingrow-1" class="toppingRow">
+                                        <td align="left" valign="middle">
+                                            <input type="text" onkeypress="return RestrictVarchar(this,event,15);" id="toptxt-1"   class="topping"   placeholder="Add Topping">
+                                            <input type="hidden" id="topid-1" value="">
+                                        </td>
+                                        <td align="left" valign="middle">
+                                            <input type="number"  id="topcost-1" onkeypress="return isNumber(event);"   placeholder="0">
+                                        </td>
+                                        <td align="left" id="topaction-1" valign="middle">
+                                            <a id="addrow-1" class="add-plus"></a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!--<div id="toppingr0" class="toppingRow">
+                                <input type="text" id="toppingbutton" placeholder="Write Topping Name">
+                                <input type="text" id="toptxt-0" placeholder="Add Topping" class="per60">
+                                <input type="hidden" id="topid-0" value="">
+                                <input type="text" id="topcost-0" placeholder="Cost" class="per28">
+                                <a href="#" id="removerow-0" onclick="removetopping(this);" class="add-min"></a>
+                            </div>
+                            <div id="toppingr1" class="toppingRow">
+                                <input type="text" id="toptxt-1" placeholder="Add Topping" class="per60">
+                                <input type="hidden" id="topid-1" value="">
+                                <input type="text" id="topcost-1" placeholder="Cost" class="per28">
+                                <a href="#" id="addrow-1" class="add-plus"></a>
+                            </div>-->
+                        </div>
+                        <h6 class="dividHeading">
+                            Crust Details</h6>
+                        <div id="cru1" class="addfieldsRow custom-fields">
+                            <div class="fieldsTable custom-fields">
+                                <table width="100%" id="tblcrust" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td align="left" valign="middle" width="100%" colspan="3">
+                                            <label class="fieldHead">
+                                                Write Crust Name</label>
+                                            <input type="text" id="topcrustbutton" onkeypress="return RestrictVarchar(this,event,100);" placeholder="Write Crust Name">
+                                        </td>
+                                    </tr>
+                                    <tr class="toppingRow">
+                                        <td align="left" valign="middle" width="45%">
+                                            <label class="fieldHead">
+                                                Add Crust</label>
+                                        </td>
+                                        <td align="left" valign="middle" width="45%">
+                                            <label class="fieldHead">
+                                                Cost</label>
+                                        </td>
+                                        <td align="left" valign="middle" width="10%">
+                                            <label class="fieldHead">
+                                                Action</label>
+                                        </td>
+                                    </tr>
+                                    <tr id="crustrow-0" class="crustrow">
+                                        <td align="left" valign="middle">
+                                            <input type="text"  onkeypress="return RestrictVarchar(this,event,15);" id="topcrust-0" list="crustlist"  class="crust"  placeholder="Add Crust">
+											<datalist id="crustlist"">
+											
+											
+										</datalist>
+                                            <input type="hidden" id="topcrustid-0" value="">
+                                        </td>
+                                        <td align="left" valign="middle">
+                                            <input type="number"  id="topcrustcost-0" onkeypress="return isNumber(event);" placeholder="0">
+                                        </td>
+                                        <td align="left" id="crustaction-0" valign="middle">
+                                            <a id="removecrustrow-0" onclick="return removecrust(this);" class="add-min"></a>
+                                        </td>
+                                    </tr>
+                                    <tr id="crustrow-1" class="crustrow">
+                                        <td align="left" valign="middle">
+                                            <input type="text" onkeypress="return RestrictVarchar(this,event,15);" id="topcrust-1" list="crustlist"  class="crust"  placeholder="Add Crust">
+                                            <input type="hidden" id="topcrustid-1" value="">
+                                        </td>
+                                        <td align="left" valign="middle">
+                                            <input type="number"  id="topcrustcost-1" onkeypress="return isNumber(event);" placeholder="0">
+                                        </td>
+                                        <td align="left" id="crustaction-1" valign="middle">
+                                            <a id="addcrust-1" class="add-plus"></a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!--<div id="crust0" class="toppingRow">
+                                <input type="text" id="topcrustbutton" placeholder="Write Crust Name">
+                                <input type="text" id="topcrust-0" placeholder="Add Crust" class="per60">
+                                <input type="hidden" id="topcrustid-0" value="">
+                                <input type="text" id="topcrustcost-0" placeholder="Cost" class="per28">
+                                <a href="#" id="removecrustrow-0" onclick="removecrust(this)" class="add-min"></a>
+                            </div>
+                            <div id="crust1" class="toppingRow">
+                                <input type="text" id="topcrust-1" placeholder="Add crust" class="per60">
+                                <input type="hidden" id="topcrustid-1" value="">
+                                <input type="text" id="topcrustcost-1" placeholder="Cost" class="per28">
+                                <a href="#" id="addcrust-1" class="add-plus"></a>
+                            </div>-->
+                        </div>
+                        <div class="pull-left FullWidth">
+                          
+                            <div id="filelist">
+                               
+								<div class="color_small">  <h6 class="dividHeading"> Upload Item Image from  Gallery </h6></div>
+								   <!----=====================================================================================================-->
+								</div>
+                        
+                            <div id="container">
+                            
+                                <a  onClick="getPhoto(pictureSource.PHOTOLIBRARY, false);">
+                                
+                                    <img src="images/addfile.png">[Select File]</a> </br> </br>
+                                    (or)
+                                 	<div class="color_small">  <h6 class="dividHeading"> Take a photo  </h6></div>
+								   <!----=====================================================================================================-->
+								</div>
+                                    <a  onClick="capturePhotoEdit();">
+                                      
+                                    	<img src="images/icon_cam.png">
+                                    </a> 
+										
+                            </div>
+                             <input type="hidden" value="" id="omsimage" />
+                             
+                             <div class="captureImage_Wrapper">
+							 	<a class='icon-cancel delebutton' id="delete"  onclick='deleteimage()' ></a>		
+                             	<img src="" id="imgsrss"/>
+									
+							
+                             </div>	
+                               
+                             					   
+								
+								
+                            <br />
+                            <br />
+                            <div class="toppingRow" style="display:none">
+                                <pre id="console" style="width: 85%; background-color: black; color: white">Select file to upload</pre>
+                            </div>
+							
+							
+							
+						
+							<!-- -->
+							 <h6 class="dividHeading">
+                                </h6>
+                            <!----=====================================================================================================-->
+                        </div>
+                        <div class="fieldsTable custom-fields">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td align="left" valign="middle" width="100%" id="itemDescription">
+                                        <label class="fieldHead">
+                                            Write Item description</label>
+                                           <textarea  id="itmdesc"  placeholder="Write Description" onkeypress="return RestrictVarchar(this,event,150);"  style="height: 100px;width:100%" ></textarea></br></br>
+                                        <a href="#" id="savedetails" onclick="return SaveDetails();" class="btn btn-primary FullWidth sa">Save</a>
+                                    </td>
+                                </tr>
+								 <tr>
+                                    <td align="left" valign="middle" width="100%" id="itemDescription">
+                                       <a href="#" class="btn btn-secondary btn-marg20 FullWidth"  id="Back" >Cancel</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- ending -->
+            </div>
+        </div>
+		
+    </div>
+    <div id="errornet1"  class="emptyMsg" style="display:none" >
+					<div class="emptyMsg_inner">
+						Please check your network connectivity and try again 
+						
+						<center><button type="button"class="btn btn-primary" onclick="network()">Ok</button></center>
+					</div>
+	</div>
+	   <!--error page for timeout error-->
+	<div id="errornet2"  class="emptyMsg" style="display:none" >
+					<div class="emptyMsg_inner">
+						Unable to connect to Lot Easy. Please check your network connectivity and try again.
+						<center><button type="button"class="btn btn-primary" onclick="network()">Ok</button></center>
+					</div>
+	</div>
+    <!----Loading Image--------->
+    <div id="loader" class="loaderMain">
+        <div class="loading_inner">
+            <img src="images/loader.gif" /></div>
+    </div>
+</body>
+</html>

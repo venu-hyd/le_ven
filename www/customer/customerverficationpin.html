@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+</head>
+<body >
+	<div data-role="page" class="ordermysnack" id="customerverificationpinpage" data-quicklinks="true" data-dom-cache="false">
+<form id="customerform" name="customerform">		
+        <!-- Content Start -->
+        <div role="main" class="ui-content oms-content">
+        	<div class="logoFull starlogoMarg" style="margin-top:0px;"><img src="images/logo.png"/></div>
+            <div class="createAccountWrap">
+                <div class="row-fluid">
+                    <label class="fieldLabel ph-icon">Phone Number <i class="icon-mobile ph-icon-i"></i></label>
+                    <div class="insideInput phfld">
+                        <input id="phonenumberfield" type="text" disabled/>
+                        <button class="customerpchange btn btn-a">Change</button>
+                    </div>
+                    <i class="iLabel">SMS has been sent to above phone number with PIN details</i> <br><br>
+                </div>
+                
+                <div class="row-fluid">
+                    <label class="fieldLabel">Verification Pin</label>
+                    <div class="insideInput"><input type="tel" placeholder="Verification Pin" id="vendorpin" name="vendorpin" onkeypress="return nospecialCharacters(event)" required/><a href="#"class="iconPinReload">Resend Pin</a></div>
+                    <i class="iLabel">Please provide the pin received on your registered Mobile</i> <br><br>
+                </div>
+                <div class="row-fluid">
+                    <label class="fieldLabel">Captcha</label>
+                    <input type="tel" id="loginCaptchaCode" name="loginCaptchaCode" placeholder="CaptchaCode" required>
+                    <label  class="cmismatch">Captcha Mismatch</label>
+                </div>
+                <div class="capthaWrpper">
+                	<div class="capthaleft">
+                    	<label class="fieldLabel captha-img" id="randomfield" >Captcha</label>
+                    </div>
+                    <div class="captharight">
+                    	<div type="button" class="iconbtn-refresh" onclick="DrawCaptcha();">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                	<button class="customersbmtbtn btn btn-a">Submit</button>
+                </div>
+            </div>
+
+            <!-- Customer Invalid Login -->
+            <div data-role="popup" data-history="false"   id="custinvalidpin" class="ui-content" data-theme="a">
+                <div class="popup_inner popup_sm">
+                    <div class="popup_content">
+                        <i class="pop_tooltipIcon icon-help"></i>
+                        <p>Incorrect Verification pin , please enter the latest Verification Pin sent to your mobile </p>
+                    </div>
+                    <div class="popup_footer custinvalidpinclose">
+                        <a>Ok</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- pickitem back  Popup  -->
+        <div data-role="popup" data-history="false" id="regenpopup"   class="ui-content" data-theme="a">
+            <div class="popup_inner popup_sm">
+                <div class="popup_content" style="text-align:center;">
+                    <p>Do you want to Regenerate Pin</p>
+                </div>
+                <div class="popup_footer">
+                    <div class="twobtns">
+                     <a class="regenerateyes">Yes</a>
+                    	<a class="regenerateno">No</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+         <!-- Regenerate Pin Alert PopUP  -->
+            <div data-role="popup" data-history="false"   id="regpinalert" class="ui-content" data-theme="a">
+                <div class="popup_inner popup_sm">
+                    <div class="popup_content">
+                        <i class="pop_tooltipIcon"></i>
+                        <p id="regpinmsg"></p>
+                    </div>
+                    <div class="popup_footer regpinalertclose">
+                        <a>Ok</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+         
+
+ </form>
+<script type="text/javascript">
+
+
+window.onload = function() {
+    if (!window.jQuery) {  
+        window.location.replace('main.html');
+        return false;
+    } 
+}
+
+       var vendor_id = '';
+var mobile = '';
+
+$("#customerverificationpinpage").on("pagebeforeshow", function(event) {
+
+
+if (typeof customerverificationloaded == 'undefined') {
+        $.getScript('js/customerverificationpin.js', function(data, textStatus, jqxhr) {
+            customerverificationpinfunctionality();
+        });
+    } else {
+        customerverificationpinfunctionality();
+    }
+
+
+    UUID = getParameterByName('UUID');
+    vendor_id = getParameterByName('vendor_id');
+    mobile = getParameterByName('mobile_num');
+    cust_id = getParameterByName('cust_id');
+    $('.cmismatch').hide();
+
+$('#phonenumberfield').val(mobile);
+	
+    DrawCaptcha();
+    event.stopImmediatePropagation();
+    event.preventDefault();
+    return false;
+}); 
+
+    </script>
+	</div>
+</body>
+</html>

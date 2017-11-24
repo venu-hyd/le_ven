@@ -1,0 +1,138 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, user-scalable=no" />
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<meta http-equiv='cache-control' content='no-cache' />
+		<meta http-equiv='expires' content='0' />
+		<meta http-equiv='pragma' content='no-cache' />
+		<title>OrderMySnack</title>
+		
+		
+		<!---Style Sheets------------------------->
+		<link href="css/bootstrap.css" rel="stylesheet" media="screen" />
+		<link href="css/styles.css" rel="stylesheet" media="screen" />
+		<link href="css/theme.css" rel="stylesheet" media="screen" />
+		<link href="css/fontello.css" rel="stylesheet" media="screen" />  
+
+			
+		<!---Dependencies------------------------->
+		 <script src="cordova.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/vendor-admin-create-vendor.js"></script>
+		<!--<script type="text/javascript" charset="utf-8" src="js/cordova-2.7.0.js"></script>-->
+		<!-- <script src="js/bootstrap.min.js"></script> -->
+		<script type="text/javascript" src="js/url.js"></script>
+		<script type="text/javascript" src="js/bigradiobutton.js"></script>
+		<!--<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.3.css" />
+		<script src="js/jquery.mobile-1.4.3.js"></script>-->
+
+		
+	</head>
+	<body>
+
+		<div class="DarkBg">
+			<!--Header Section-->
+			<header class="headerWrap">
+				<div class="tpLogoSection">
+					<a id="homeicon" class="tpBN-lt icon-home-1" onclick="back()"></a>
+					<div class="tpPageHeading">
+						<div class="inheadLogo"  style="display: block;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">Lot Easy</div>
+					</div>
+					<a id="logout" class="tpBN-rt icon-logout"></a>
+				</div>
+			</header>
+			
+			<section class="headSubDtls">
+				<ul>
+					<li class="theatreName"><label id="vendorname" title="Vendor Name">Vendor Name</label></li>
+					<li class="screenNo" ><label id="locationname" title="Vendor Name" style="display: block;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">Location Name</label></li>
+					<li class="dateTime"><label id="vendorusername" title="Vendor Name">User Name</label></li>
+				</ul>
+			</section>
+			
+			<!-- Content Section -->
+			<div class="contentWrap" id="takewrap">
+				<div class="contentWrap_inner">
+					<h4 id="headertext" class="h4Head text-uppercase text-center">Create Vendor Users</h4>
+					
+					<section class="errorWrapperNew">
+						<div style="display:none" class="alert alert-error">
+						  <h4 id="errMsg"><strong>Error!</strong>  The daily cronjob has failed. </h4>
+						  <a href="#" class="alert_close" title="close"></a>
+						</div>
+						
+						<div  style="display:none" class="alert alert-success">
+						  <h4 id="successMsg"><strong>Succcess!</strong>  The daily cronjob has suceeded. </h4>
+						  <a href="#" class="alert_close" title="close"></a>
+						</div>
+					</section>
+				
+					<div class="fields-fillForm custom-fields">
+						<input id="name" type="text" placeholder="Name"  onkeypress="return RestrictVarchar(this,event,30);"  min="3" max="25"/><!-- PPPPPPP-->
+						<input id="mobile_number" type="tel" placeholder="Mobile Number"  onkeypress="return RestrictPhoneNumber(this,event);"  min="3" max="10"/>
+						<!--<input id="email_address" type="text" placeholder="Email Address" onkeypress="return restrictPercentAnd(event);" min="5" max="25" />-->
+						<input id="verification_code" style="display:none" type="text" placeholder="Please Enter Verification Code"/>
+						<div class="customRow cvCols pull-left" style="margin-top:10px;">
+							<div class="custCol-auto">
+								<label class="pull-left tp_mrgin_mins3"><input type="radio" name="radio-choice-1" id="operator" class="required radio bigradio"></label><p>Operator</p>
+							</div>
+							<div class="custCol-auto">
+								<label class="pull-left tp_mrgin_mins3"><input type="radio" name="radio-choice-1" id="serviceagent" class="radio bigradio"></label><p>Service Agent</p>
+							</div>
+							<div class="custCol-auto">
+								<label class="pull-left tp_mrgin_mins3"><input type="radio" name="radio-choice-1" id="cook" class="radio bigradio"></label><p>Cook</p>
+							</div>
+						</div>                
+						<div class="fillBtn pull-left FullWidth">
+							<a href="#" class="btn-createVendorUser FullWidth btn btn-primary">Submit</a>
+						</div>
+						<div class="fillBtn pull-left FullWidth">
+						</br></br>
+							<!--<a href="#" class="btn btn-primary FullWidth" id="Back">Back</a>-->
+						</div>
+					</div>
+					
+					
+					
+				</div>
+			</div>
+			 
+		</div>
+		 <!--error page for network connection-->
+			<div id="errornet1"  class="emptyMsg" style="display:none" >
+							<div class="emptyMsg_inner">
+								Please check your network connectivity and try again 
+								
+								<center><button type="button"class="btn btn-primary" onclick="network()">Ok</button></center>
+							</div>
+			</div>
+			   <!--error page for timeout error-->
+			<div id="errornet2"  class="emptyMsg" style="display:none" >
+							<div class="emptyMsg_inner">
+								Unable to connect to Lot Easy. Please check your network connectivity and try again.
+								<center><button type="button"class="btn btn-primary" onclick="network()">Ok</button></center>
+							</div>
+			</div>
+		<!----Loading Image--------->
+		<div id="loader" class="loaderMain">
+					<div class="loading_inner"><img src="images/loader.gif"/></div>
+		</div>
+        
+        
+        <script type="text/javascript">
+	$(document).ready(function(){
+		// Readio box
+		
+		$('.bigcheck, .bigradio').each(function(){
+			$(this).parent().append('<span class="bigcheck-target"></span>');
+		});
+		
+	});
+</script>
+
+
+	</body>
+</html>
