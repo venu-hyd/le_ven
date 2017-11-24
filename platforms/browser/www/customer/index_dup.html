@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+<style type="text/css">
+	
+.ui-panel {
+width: 8em;
+min-height: 100%;
+max-height: none;
+border-width: 0;
+position: fixed;
+top: 0;
+display: block;
+}
+
+.panel-wrapper {
+height: 760px;
+right: 0;
+}
+
+.panel-wrapper div {
+border-top: 1px solid #ccc;
+border-bottom: 1px solid #ccc;
+}
+
+
+
+</style>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>OrderMySnack</title>
+
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css">
+    <link rel="stylesheet" href="css/jqm-demos.css">
+    <link rel="stylesheet" href="css/homedelivery_styles.css">
+    <link rel="stylesheet" href="css/fontello.css">
+    <link rel="stylesheet" href="css/customer_styles.css">
+     <script type="text/javascript" src="cordova.js"></script>   
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/lodash.min.js"></script>
+
+<script type="text/javascript" src="js/jquery.validate.js"></script>
+      <script type="text/javascript" src="js/additional-methods.js"></script>
+      <script type="text/javascript" src="js/jquery-ui.js"></script>  
+<script type="text/javascript" src="js/custom/customerjs/JSONQ.js"></script> 
+
+<script type="text/javascript" src="js/allfiles.js"></script> 
+
+   
+<script type="text/javascript">
+
+
+document.addEventListener("deviceready", function() {
+	document.addEventListener("backbutton", function(e) {
+		if ($.mobile.activePage.is('#itemssearchpage')) //main.html
+		{
+			backbuttoncallforsearchpage();
+		}
+		
+		else if ($.mobile.activePage.is('#customerpage')) //main.html
+		{
+			backbuttonforcustomerfunctionality();
+		}
+
+		else
+		{
+		return false;
+		}
+		
+		
+	}, false);
+}, true);
+
+
+
+
+function backbuttonforcustomerfunctionality() {
+
+
+
+		 var shownrnotpickpageback = localStorage.getItem('showpickitemspage');
+
+
+
+		 	 if(shownrnotpickpageback==='no')
+      {
+      
+      
+   //   var urlforvendor = window.location.href;
+ //$("#customerpage .orderplaced_succclose").trigger("click");
+
+      return false;
+
+		}
+
+
+	
+      if ($('.ui-popup-active').length) {
+      $("#customerpage .tickclose").trigger("click");
+      return false;
+    }
+
+   
+ if ($(".ui-popup-active").length > 0) {
+
+ //	event.stopImmediatePropagation();
+ // event.preventDefault();
+  return false;
+       
+    } 
+    
+if($('#customerpage #loaderforindex').is(':visible'))
+{
+  
+return false;
+}
+
+    else
+    {
+ 
+  $( "#customerpage .pickitemshome" ).trigger( "click" );
+}
+  
+}
+
+
+ function backbuttoncallforsearchpage() {
+
+      if($('#itemssearchpage #loaderforsearch').is(':visible'))
+      {
+          return false;
+      }
+        else
+        {
+   $('[data-role="popup"]').popup("close");
+   $("#itemssearchpage .pickitemshomesearch").trigger( "click");
+        }
+   
+    return false;
+}
+
+
+
+
+
+		
+$( document ).ready(function() 
+{
+ $("#itemssearchpage").remove();
+
+
+ var shownrnotpickpageready = localStorage.getItem('showpickitemspage');
+
+      if(shownrnotpickpageready==='no')
+      {
+      
+      
+      var urlforvendor = window.location.href;
+ $("#customerpage .orderplaced_succclose").trigger("click");
+
+      return false;
+
+		}
+
+
+
+  if(screen_id==''||screen_id==null||screen_id=='undefined')
+               {
+            var   	urlforvendor = window.location.href;
+ $("#customerpage .orderplaced_succclose").trigger("click");
+   return false;
+               }
+
+		        
+
+});
+
+
+
+
+
+
+
+   </script>
+
+
+
+
+
+</head>
+
+<style>
+   .ui-page {
+   -webkit-backface-visibility: hidden !important;
+   }
+   textarea {
+   -webkit-user-select: auto;
+   }
+   .cmismatch {
+   background-color: red;
+   }
+   .error{
+   right: 42px !important;
+   }
+   .ui-content .ui-listview, .ui-panel-inner > .ui-listview
+   {
+   margin: 0em;
+   }
+   .ui-page .ui-header
+   {
+   background: #d03e43;
+   }
+.ui-autocomplete { position: absolute; cursor: default;z-index:30 !important;}  
+.ui-front { z-index: 9999; }
+.ui-page {
+  -webkit-backface-visibility: hidden;
+}
+</style>
+<body>
+<div data-role="page" class="ordermysnack" data-quicklinks="true" id="customerpage" data-dom-cache="false">
+    <!-- Header Start -->        
+    <div data-role="header" class="oms-header" style="position:fixed;    width: 100%;    z-index: 9;">
+        <div class="header_left">
+           <!-- <a href="" class="header-icons icon-left-big pickitemsback"></a>-->
+
+            <a href="" class="header-icons pickitemshome"><img src="images/header_icon_arrow.png" alt=""/></a>
+        </div>
+        <h1 class="headerLogo headerLogoWith"><span class="headvendnametext"></span><br>
+          <i><span class="headloctext"></span>  <span class="headscreentext"></span></i>
+        </h1>
+        <div class="header_right">
+              <a class="header-icons icon-search"></a>
+            <a href="#rightpanel" class="header-icons icon-menu rightpanelclass"></a>
+           
+        </div>
+    </div>
+    
+    <div role="main" class="ui-content oms-content" style="padding:0px; margin-top: 72px;">
+        <!-- Start Menu -->
+        <div class="top_swiper_wrap">
+            <div class="swiper-nav swiper-container">
+                <div class="lt_rt_wrap">
+                    <a class="icon-left-open icon_lt"></a>
+                    <a class="icon-right-open icon_rt"></a>
+                </div>
+                <div class="swiper-wrapper" id="swipecontainer"></div>
+            </div>
+        </div>
+        
+       <div class="swiper-pages swiper-container bottom_swiper_wrap">
+           <div class="swiper-wrapper">
+               <div class="swiper-slide" style="width:100% !important">
+                   <div class="swiper-container scroll-container">
+                       <!--<div class="swiper-scrollbar"></div>-->
+                       <div class="swiper-wrapper" id="datacontainer" style="display:inline">
+                       </div>
+                   </div>
+               </div>
+         </div>
+       <!-- End Menu -->
+       </div>
+            
+        <!-- My Orders Page Start -->
+        <div class="MyOrdersPage" id="mainmyordersdiv" style="margin-bottom:100px; display:none;">
+            <div class="row">
+                <div class="TreeMenu_Content" id="myordersfinal">
+                </div>
+            </div>
+        </div>
+        <!-- My Orders Page End -->
+        
+        <!-- Addons Popup Content Start -->
+        <!-- Addons Popup Content End -->
+        
+       <!-- My Orders footer Start -->
+        <div data-role="footer" data-theme="a" data-position="right" role="contentinfo" class="myOrderPanel_footer" style="display:none;">
+ 
+           <div class="myOrderPanel_inner">
+                <span data-myorders="0" class="myorders icon-basket-2"> <i class="myordersiclass">0</i></span>
+                <span class="subtotalWrap">
+                    <b class="subtotal" data-subtotal="0">Subtotal &#x20B9 <span>0</span></b><br>
+                    <span class="minOrdertext">Minimum Order Is &#x20B9 </span><span class="minOrder"></span>
+                </span>
+            </div>
+        </div>
+        <!-- My Orders footer End -->
+        
+        
+        
+        <div class="MyOrdersdisplay">
+        </div>
+        
+        <!-- Confirm Order Popup Start -->
+        <div data-role="popup" data-history="false"     id="confirmOrder_pop"   class="ui-content" data-theme="a">
+            <div class="popup_inner popup_sm">
+                <div class="popup_content" style="text-align:center;">
+                    <img src="images/icon-homedelivery.png"/>
+                    <p>Thank you, Click 'Done' to place your order. Order once placed cannot be modified or cancelled</p>
+                    	<label id="custpageerrorlabel" style="margin:100px auto 60px auto;color:Red; line-height:40px;font-size:medium;display:none">Please check your network connectivity and try again</label>
+                </div>
+                <div class="popup_footer">
+                    <div class="twobtns">
+                        <a class="secondary goback">Go back</a>
+                        <a class="confirmorder">Done</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Confirm Order Popup End -->
+        
+        <!-- Cancel Order Popup Start -->
+        <div data-role="popup"  data-history="false"   id="cancelOrder_pop" data-history="false"  class="ui-content" data-theme="a">
+            <div class="popup_inner popup_sm">
+                <div class="popup_content" style="text-align:center;">
+                    <p>Are you sure,<br>you want to Cancel this Order?</p>
+                </div>
+                <div class="popup_footer">
+                    <div class="twobtns">
+                        <a class="secondary cancelyes">Yes</a>
+                        <a class="cancelno">No</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Cancel Order Popup End -->
+
+        <div data-role="popup" data-history="false" data-dismissible="false" id="notoppcrusts"  class="ui-content" data-theme="a">
+            <div class="popup_inner popup_sm">
+                <div class="popup_content" style="text-align:center;">
+                    <p class="">No Addons Present For this Item</p>
+                </div>
+                <div class="popup_footer notoppcrustsclose">
+                        <a class="">Ok</a>
+                </div>
+            </div>
+        </div>
+        
+
+         <div data-role="popup" data-history="false"   id="noitems" class="ui-content" data-theme="a">
+                <div class="popup_inner popup_sm">
+                    <div class="popup_content">
+                        <i class="pop_tooltipIcon"></i>
+                        <p id="noitemsmsg">No Items are available with vendor</p>
+                    </div>
+                    <div class="popup_footer noitemsclose">
+                        <a>Ok</a>
+                    </div>
+                </div>
+            </div>
+
+
+              <div data-role="popup" data-history="false" data-dismissible="false" id="custpageerror" class="ui-content" data-theme="a">
+                <div class="popup_inner popup_sm">
+                    <div class="popup_content">
+                        <i class="pop_tooltipIcon"></i>
+                        <p id="timeoutalertmsg">Oops! Please try again</p>
+                    </div>
+                    <div class="popup_footer custpageerrorclose">
+                        <a>Ok</a>
+                    </div>
+                </div>
+            </div>
+        
+
+          <div data-role="popup" data-history="false" data-dismissible="false"  id="timeoutalerttryagain" class="ui-content" data-theme="a">
+                <div class="popup_inner popup_sm">
+                    <div class="popup_content">
+                        <i class="pop_tooltipIcon"></i>
+                        <p id="timeoutalertmsg">Please check your network connectivity and try again</p>
+                    </div>
+                    <div class="popup_footer timeoutalerttryagainclose">
+                        <a>Try Again</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Cancel Order Popup Start -->
+        <div data-role="popup"  data-history="false"   id="minorder_pop"  class="ui-content" data-theme="a">
+            <div class="popup_inner popup_sm">
+                <div class="popup_content" style="text-align:center;">
+                    <p class="minordercla"></p>
+                </div>
+                <div class="popup_footer minorderpopcancelss">
+                        <a class="">Ok</a>
+                </div>
+            </div>
+        </div>
+        <!-- Cancel Order Popup End -->
+
+
+            <div data-role="popup" data-history="false" data-dismissible="false"  id="timeoutalertorderplace" class="ui-content" data-theme="a">
+                <div class="popup_inner popup_sm">
+                    <div class="popup_content">
+                        <i class="pop_tooltipIcon"></i>
+                        <p id="timeoutalertorderplacemsg">Please check your network connectivity and try again</p>
+                    </div>
+                    <div class="popup_footer timeoutalertorderplaceclose">
+                        <a>Try Again</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+                        <!-- Atleast one quantity -->
+        <div data-role="popup"  data-history="false"  id="one_quantity"  class="ui-content" data-theme="a">
+            <div class="popup_inner popup_sm">
+                <div class="popup_content" style="text-align:center;">
+                    <p class="">Add atleast 1 quantity to choose Addons</p>
+                </div>
+                <div class="popup_footer one_quantityclose">
+                        <a class="">Ok</a>
+                </div>
+            </div>
+        </div>
+        <!-- Atleast one quantity Popup End -->
+		
+		<!-- pickitem back  Popup  -->
+        <div data-role="popup"  data-history="false"  id="pickitemback"  data-history="false" class="ui-content" data-theme="a">
+            <div class="popup_inner popup_sm">
+                <div class="popup_content" style="text-align:center;">
+                   
+                    <p>Your current Item selection will not be saved -  Exit?</p>
+                </div>
+                <div class="popup_footer">
+                    <div class="twobtns">
+                    	<a class="pickitemyes">Yes</a>
+						<a class="secondary pickitemno">No</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div data-role="popup" data-history="false"   id="timeoutalert" class="ui-content" data-theme="a">
+                <div class="popup_inner popup_sm">
+                    <div class="popup_content">
+                        <i class="pop_tooltipIcon"></i>
+                        <p id="timeoutalertmsg">Please check your network connectivity and try again</p>
+                    </div>
+                    <div class="popup_footer timeoutalertclose">
+                        <a>Ok</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+                 <div data-role="popup" data-history="false"   id="timeoutalertcancel" class="ui-content" data-theme="a">
+                <div class="popup_inner popup_sm">
+                    <div class="popup_content">
+                        <i class="pop_tooltipIcon"></i>
+                        <p id="timeoutalertmsgcancel">Please check your network connectivity and try again</p>
+                    </div>
+                    <div class="popup_footer timeoutalertcancelclose">
+                        <a>Ok</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+                 <div data-role="popup" data-history="false"   id="orderplaced_succ" data-dismissible="false"  class="ui-content" data-theme="a">
+                <div class="popup_inner popup_sm">
+                    <div class="popup_content">
+                        <i class="pop_tooltipIcon"></i>
+                        <p id="orderplaced_succmsg">Thank you for placing order</p>
+                    </div>
+                    <div class="popup_footer orderplaced_succclose">
+                        <a>Ok</a>
+                    </div>
+                </div>
+            </div>
+
+              <div data-role="popup" data-history="false"   id="orderplaced_error" class="ui-content" data-theme="a">
+                <div class="popup_inner popup_sm">
+                    <div class="popup_content">
+                        <i class="pop_tooltipIcon"></i>
+                        <p id="orderplaced_errormsg">Oops! Please try again</p>
+                    </div>
+                    <div class="popup_footer orderplaced_errorclose">
+                        <a>Ok</a>
+                    </div>
+                </div>
+            </div>
+
+
+             <div data-role="popup"  data-history="false" data-dismissible="false"  id="itemdelpopup" class="ui-content" data-theme="a">
+                <div class="popup_inner popup_sm">
+                    <div class="popup_content">
+                        <i class="pop_tooltipIcon"></i>
+                        <p id="itemdelpopupmsg">Item will be deleted from your Order, Press ok to Delete</p>
+                    </div>
+                    <div class="popup_footer">
+                <div class="twobtns">
+                <a class="secondary" id="noclick">No</a>
+                    <a class="" id="yesclick">Yes</a>
+                </div>
+            </div>
+                </div>
+            </div>
+
+             <div data-role="popup" data-history="false"  data-dismissible="false" id="notoppcrusts"  class="ui-content" data-theme="a">
+            <div class="popup_inner popup_sm">
+                <div class="popup_content" style="text-align:center;">
+                    <p class="">No Addons Present For this Item</p>
+                </div>
+                <div class="popup_footer notoppcrustsclose">
+                        <a class="">Ok</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Orders Popup -->
+        <div data-role="popup"  data-history="false"   id="recentOrders"  class="ui-content" data-theme="a">
+        </div>
+            
+    </div>       
+
+  <!-- rightpanel  -->
+ <div data-role="panel" id="rightpanel" data-dismissible="true" data-position="right" data-display="overlay" data-theme="c">
+ <!--
+ <div data-role="panel" id="rightpanel"  style="overflow-y: scroll" data-position="right" data-dismissible="true" data-display="overlay" data-theme="c">-->
+        <div class="ui-panel-inner">
+            <div class="tpMenuWrap">
+                <a href="#demo-links" data-rel="close" class="icon-cancel-circled-1 panelCloseBtn"></a>
+                <ul class="ul_menu">
+                    <li><a>My Recent Orders</a></li>
+                </ul>
+                <div class="recentOrderslistWrap">
+                </div>
+            </div>
+            <div class="btMenuWrap">
+                <ul class="ul_menu">
+                    <li><a id="aboutloteasy" >About Lot Easy</a></li>
+                    <li><a id="aboutloteasyfaqs">FAQs</a></li>
+                    <li><a>Send Feedback</a></li>
+                    <li><a>Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+   
+    <!-- rightpanel end-->
+	  <div id="loaderforindex" class="loaderMain">
+                    <div class="loading_inner"><img src="images/loader.gif"/></div>
+            </div>
+ <script type="text/javascript">
+              var screen_id = '';
+             var UUID = '';
+             var cust_id = '';
+             var minimum_order = '';
+             var tablenum = '';
+             var addreslabel = '';
+             var redirectedfrom = '';
+             var urlforvendor = '';
+             var seatnum = '';
+             var row = '';
+             var accessedfrom = '';
+             var orderjson = '';
+             var ordersplitjson;
+             var totalitemselected = [];
+             var pagebelongsto = 'vendortakeorder' ;
+
+
+             var location_id = '';
+             var vendortypeloggedin = '';
+             var vendor_id = '';
+             var VID = '';
+             var vendor_name = '';
+             var vendor_user_name = '';
+             var vendorUserId = '';
+             var sName = '';
+             var customer_id = '';
+
+ $(document).on('pagebeforeshow', '#customerpage', function(event) 
+{
+	 $("#itemssearchpage").remove();
+      var shownrnotpickpageshow = localStorage.getItem('showpickitemspage');
+
+ 
+
+      if(shownrnotpickpageshow==='no')
+      {
+
+        $("#customerpage .orderplaced_succclose").trigger("click");
+        return false;
+      }
+        else
+        {
+	$("#customerpage #loaderforindex").show();
+ $.mobile.defaultPageTransition = 'none';
+       var calledfrom = '';
+                calledfrom = getParameterByName('calledfrom');
+
+
+                   var empty_array_descript = [];
+
+                if(calledfrom=='searchpage')
+                {
+                   
+                        if(sessionStorage.length==0)
+                        {
+                            sessionStorage.clear();
+                        }
+                        else
+                        {
+
+    for (var i = 0; i < sessionStorage.length; i++)
+  {
+    var propertyName = sessionStorage.key(i);
+    var checker_if_proper = propertyName.indexOf("lastwrap"); 
+    
+    if(checker_if_proper>-1)
+    {
+    empty_array_descript.push(checker_if_proper);
+     break;
+    }
+   
+  }  // for loop ends here
+
+  if(!empty_array_descript.length>0)
+  {
+    empty_array_descript = [];
+    empty_array_descript.length=0;
+         sessionStorage.clear(); 
+  }
+ 
+}
+
+                } 
+
+                
+                else 
+                {
+                     sessionStorage.clear();
+                }
+                 UUID = getParameterByName('UUID');
+                 screen_id = getParameterByName('screen_id');
+                 cust_id = getParameterByName('cust_id');
+                 minimum_order = getParameterByName('minimum_order');
+                 tablenum = getParameterByName('tablenum');
+                 addreslabel = getParameterByName('addreslabel');
+                 redirectedfrom = getParameterByName('redirectedfrom');
+                 seatnum = getParameterByName('seatnum');
+                 seatnum = encodeURIComponent(seatnum.trim());
+                 row = getParameterByName('row');
+                  row = encodeURIComponent(row.trim());
+                 accessedfrom = getParameterByName('accessedfrom');
+                 globalheigth = $( "#customerpage" ).height();
+                 globalwidth = $( "#customerpage" ).width();
+                 urlforvendor = window.location.href;
+                 
+                   location_id = getParameterByName('location_id');
+              vendortypeloggedin = getParameterByName('vendortypeloggedin');
+              vendor_id = getParameterByName('vendor_id');
+              VID = getParameterByName('VID');
+              vendor_name = getParameterByName('vendor_name');
+              vendor_user_name = getParameterByName('vendor_user_name');
+              vendorUserId = getParameterByName('vendorUserId');
+              sName = getParameterByName('sName');
+              customer_id = getParameterByName('customer_id');
+
+                 if (minimum_order === '') {
+                     minimum_order = 0;
+                 }
+                 var min = parseFloat(minimum_order).toFixed(2);
+                 $('.minOrder').text(min);
+                 
+                 var showt1sajaxquery = $.ajax({
+                     type: 'GET',
+                     url: url + '/fromscratchmodified?screen_ids=' + screen_id,
+                     jsonpCallback: 'jsonCallback',
+                     dataType: 'jsonp',
+                     timeout: 10000,
+                     jsonp: false,
+                     cache: false,
+					  async: true,
+                     beforeSend: function() {
+                         $("#customerpage #loaderforindex").show();
+                     },
+                     complete: function() {
+                         $("#customerpage #loaderforindex").hide();
+                     },
+                     success: function(response) {
+                         jsondata = response;
+                         var jsondatalength = jsondata[0].item.T1.length;
+                         var T1categories = search('T1');
+                         try {
+                             createhorizontaltab(T1categories);
+                         } catch (ex) {
+
+                            $('#customerpage #timeoutalerttryagain').popup({history: false}).popup('open');
+                         }
+                     },
+                     	       error: function(jqXHR, exception) {
+              if (jqXHR.status === 0 || exception === 'timeout') {
+             $('#customerpage #timeoutalerttryagain').popup({history: false}).popup('open');
+            }
+            else
+            {
+                 $('#customerpage #timeoutalerttryagain').popup({history: false}).popup('open');
+            } 
+}
+                 });
+                 showt1sajaxquery.done(function() {
+                     $.ajax({
+                         type: 'GET',
+                         url: url + '/getlocationscreen?screen_ids=' + screen_id,
+                         jsonpCallback: 'jsonCallbackforscreen',
+                         cache: false,
+                         dataType: 'jsonp',
+                         jsonp: false,
+                         timeout: 10000,
+						  async: true,
+                         beforeSend: function() {
+                             $("#customerpage #loaderforindex").show();
+                         },
+                         complete: function() {
+                             $("#customerpage #loaderforindex").hide();
+                         },
+                         success: function(response) {
+                             var res_loc_name = response.screen;
+                             var res_scren_name = response.location;
+                             var minOrder = response.min_order;
+                             if (minOrder) {
+                                 var minord = parseFloat(minOrder).toFixed(2);
+                                 $('.minOrder').text(minord);
+                             }
+                             $('.headloctext').text(res_loc_name);
+                             $('.headscreentext').text(res_scren_name);
+                             $('.headscreentext').hide();
+                         },
+                         		error: function(jqXHR, exception) {
+    
+
+          if (jqXHR.status === 0 || exception === 'timeout') {
+             $('#customerpage #timeoutalerttryagain').popup({history: false}).popup('open');
+            }
+            else
+            {
+                 $('#customerpage #timeoutalerttryagain').popup({history: false}).popup('open');
+            } 
+
+}
+                     });
+                 }).done(function() {
+                  $('body').enhanceWithin();
+
+                    sessionlogic('generic');
+                 }); //
+                 if (redirectedfrom === 'vendorscreen') {
+                     // if($( ".rightpanelclass" ).hasClass( "header-icons" ))
+                     //{
+                     $("#customerpage .rightpanelclass").removeClass("header-icons");
+                     $("#customerpage .rightpanelclass").removeClass("icon-menu");
+                     $("#customerpage .rightpanelclass").removeClass("rightpanelclass");
+                     //}
+                 }
+                //   $("#customerpage #loaderforindex").hide();
+
+
+                   if(screen_id==''||screen_id==null||screen_id=='undefined')
+               {
+               	urlforvendor = window.location.href;
+ $("#customerpage .orderplaced_succclose").trigger("click");
+ 					return false;
+               }
+
+
+                 event.stopImmediatePropagation();
+                 event.preventDefault();
+                 return false;
+               }
+             }); // pageshow ends here
+
+
+
+
+
+
+ </script>
+<link rel="stylesheet" href="slider/css/swiper.min.css">
+<link rel="stylesheet" href="slider/css/simple-app.css" >
+<!-- js files  -->
+<script src="slider/js/swiper.min.js"></script>
+<script src="js/custom/customerjs/customerindex.js"></script>
+<script src="js/custom/customerjs/toppcrusts.js"></script>
+<script src="js/custom/customerjs/common.js"></script>
+<script src="js/custom/customerjs/Orders.js"></script>
+<script src="js/custom/customerjs/recentorders.js"></script>
+<script src="js/custom/url.js"></script>
+</div>
+</body>
+</html>

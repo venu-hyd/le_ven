@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+          
+      <title>OrderMySnack</title>
+      <link rel="shortcut icon" href="favicon.ico">
+      <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css">
+      <link rel="stylesheet" href="css/jqm-demos.css">
+      <link rel="stylesheet" href="css/homedelivery_styles.css">
+      <link rel="stylesheet" href="css/fontello.css">
+      <link rel="stylesheet" href="css/customer_styles.css">
+     <link rel="stylesheet" href="slider/css/swiper.min.css">
+     <link rel="stylesheet" href="slider/css/simple-app.css">
+	 <script type="text/javascript" src="cordova.js"></script>        
+      <script src="js/jquery.js"></script>
+      <script src="js/jquery.mobile-1.4.5.min.js"></script>
+      <script type="text/javascript" src="js/jquery.validate.js"></script>
+      <script type="text/javascript" src="js/additional-methods.js"></script>
+      <script type="text/javascript" src="js/jquery-ui.js"></script>  
+      <script type="text/javascript" src="js/main.js"></script>  
+      <script type="text/javascript" src="js/custom/url.js"></script>  
+      <script type="text/javascript" src="slider/js/swiper.min.js"></script>  
+      <script type="text/javascript" src="js/custom/customerjs/customerindex.js"></script>  
+      <script type="text/javascript" src="js/custom/customerjs/toppcrusts.js"></script>  
+      <script type="text/javascript" src="js/custom/customerjs/common.js"></script>  
+      <script type="text/javascript" src="js/custom/customerjs/Orders.js"></script>  
+      <script type="text/javascript" src="js/lodash.min.js"></script>  
+      <script type="text/javascript" src="js/custom/customerjs/recentorders.js"></script>  
+     <script type="text/javascript" src="js/custom/customerjs/itemsearch.js"></script>  
+      <script type="text/javascript" src="js/forbackbuttons.js"></script>
+           
+    <script type="text/javascript" src="js/barcodescanner.js"></script>
+			      <script type="text/javascript" src="js/custom/customerjs/JSONQ.js"></script> 
+
+  <script type="text/javascript" charset="utf-8">
+  
+
+  var UUID = '';
+  var deviceName = '';
+  var deviceVersion = '';
+  var deviceModel = '';
+ document.addEventListener("deviceready", function() {
+  UUID = device.uuid;
+  deviceName = device.name;
+  deviceVersion = device.version;
+  deviceModel = device.model;
+
+  
+  
+ // if ($.mobile.activePage.is('#qrcodepage')) //main.html
+  //{
+    if (typeof varcodescaloadeedd == 'undefined') {
+      loadjsfile("js/barcodescanner.js", "js");
+      
+    }
+    else
+    {
+      
+    }
+    
+ // }
+ document.addEventListener("backbutton", function(e) {
+
+ 
+ if($.mobile.activePage.is('#mainpage'))  //main.html
+       {
+          backbuttoncallformainpage();
+       }
+
+         
+       else if($.mobile.activePage.is('#createaaccountpage'))  //  create_an_account.html
+       {  
+          backbuttoncallforcreateaccountpage();
+       }
+
+       else if($.mobile.activePage.is('#customerverificationpinpage')) // customerverficationpin.html
+       {  
+          backbuttoncallforcustomerverificationpinpage();
+       }
+
+        else if($.mobile.activePage.is('#homedeliverypage')) // start.html
+       {  
+          backbuttoncallforhomedeliverypage();
+       }
+
+        else if($.mobile.activePage.is('#qrcodepage')) // qrcode.html
+       {  
+       
+        
+       
+          qrcodepagebackbutton();
+       }
+
+        else if($.mobile.activePage.is('#vendorpinpage')) // vendoridpin.html
+       {  
+          backbuttoncallforvendorpinpage();
+       }
+
+        else if($.mobile.activePage.is('#vendoridpage')) // vendor_id.html
+       {  
+          backbuttoncallforvendoridpage();
+       }
+
+       else if($.mobile.activePage.is('#customerpage')) // index.html
+       {  
+          backbuttoncallforcustomerpage();
+       }       
+
+       else if($.mobile.activePage.is('#vendoridpageforvendor')) // vendor_id_ForVendor.html
+       {  
+          backbuttoncallforvendoridpageforvendor();
+       }       
+
+       else if($.mobile.activePage.is('#itemssearchpage')) // searchpage.html
+       {  
+          backbuttoncallforsearchpage();
+       }       
+
+ 
+
+
+ }, false);
+ }, true);       
+        
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+  </script>
+   </head>
+<style>
+
+   textarea {
+     -webkit-user-select: auto;
+    }
+
+   .ui-page {
+   -webkit-backface-visibility: hidden !important;
+   }
+   
+   .cmismatch {
+   background-color: red;
+   }
+   .error{
+   right: 42px !important;
+   }
+   .ui-content .ui-listview, .ui-panel-inner > .ui-listview
+   {
+   margin: 0em;
+   }
+   .ui-page .ui-header
+   {
+   background: #d03e43;
+   }
+.ui-autocomplete { position: absolute; cursor: default;z-index:30 !important;}  
+.ui-front { z-index: 9999; }
+.ui-page {
+  -webkit-backface-visibility: hidden;
+  
+  .writecomments
+{
+    height: 50px;
+    max-height: 50px;  
+}
+
+
+}
+</style>
+   <body></body>
+      <div data-role="page" class="ordermysnack get-started-pattern" data-quicklinks="true" id="mainpage" data-dom-cache="false">
+         <!-- Content Start -->
+          
+         <div role="main" class="ui-content oms-content " style="padding-top:0px; padding-bottom:0px; text-align:center; height:100%; ">
+             <div class="logomid-wrap">
+	            <div class="logomid-inner">
+	              <img src="images/logo.png" />
+	            </div>
+          	</div>
+            <div style="width:100%; text-align:left;">
+              
+               <button class="getStarted btn btn-a get_btn">GET STARTED</button>
+            </div>
+         </div>
+         <div data-role="popup"  data-history="false"   id="forcustomerdeactivation"  class="ui-content" data-theme="a" style="display:none;">
+            <div class="popup_inner popup_sm">
+               <div class="popup_content popup_myactivelabels_content">
+                  <p>Sorry! You have been Deactivated Please Contact 000000000</p>
+               </div>
+               <div class="popup_footer forpopupcustomerdeactivation"><a>Ok</a>
+               </div>
+            </div>
+         </div>
+
+
+   <div data-role="popup" id="errormain" data-dismissible="false" class="ui-content" data-theme="a">
+            <div class="popup_inner popup_sm">
+                <div class="popup_content" style="text-align:center;">
+                    <p class="">Oops! Please try again</p>
+                </div>
+                <div class="popup_footer errormainclose">
+                        <a class="">Ok</a>
+                </div>
+            </div>
+        </div>
+
+
+
+         <div data-role="popup" id="invaliduser" data-dismissible="false" class="ui-content" data-theme="a">
+            <div class="popup_inner popup_sm">
+                <div class="popup_content" style="text-align:center;">
+                    <p class="">Invalid User</p>
+                </div>
+                <div class="popup_footer invaliduserclose">
+                        <a class="">Ok</a>
+                </div>
+            </div>
+        </div>
+
+ <div data-role="popup" id="nonetconnmain" data-dismissible="false" class="ui-content" data-theme="a">
+            <div class="popup_inner popup_sm">
+                <div class="popup_content" style="text-align:center;">
+                    <p class="">Please check your network connectivity and try again</p>
+                     <label id="mainlabel" style="margin:100px auto 60px auto;color:Red; line-height:40px;font-size:medium;display:none">Please check your network connectivity</label>
+                </div>
+                <div class="popup_footer nonetconnmainclose">
+                        <a class="">Try Again</a>
+                </div>
+            </div>
+        </div>
+         
+
+            <div id="loader" class="loaderMain">
+                    <div class="loading_inner"><img src="images/loader.gif"/></div>
+            </div>
+         <script type="text/javascript">
+   
+   $("#mainpage").on("pagebeforeshow", function(event)
+   {
+
+ sessionStorage.clear();
+ 
+
+  $.mobile.changePage.defaults.allowSamePageTransition = true;
+
+
+  $.mobile.defaultPageTransition   = 'none'
+$.mobile.defaultDialogTransition = 'none'
+$.mobile.buttonMarkup.hoverDelay = 0
+
+
+if (typeof allfilesloaded == 'undefined')
+         {
+          $.getScript('js/allfiles.js', function(data, textStatus, jqxhr) {
+        });
+         }
+      event.stopImmediatePropagation();
+      event.preventDefault();
+      return false;
+   });
+   function hasExternalJavascript(url)
+   {
+      var scripts = document.getElementsByTagName('script');
+      for (var i = 0; i < scripts.length; i++)
+      {
+         if (scripts[i].hasAttribute('src') && scripts[i].getAttribute('src') === url)
+         {
+            return true;
+         }
+      }
+      return false;
+   }
+
+   function loadjsfile(filename, filetype)
+   {
+      if (filetype == "js")
+      {
+         var head = document.getElementsByTagName('head')[0];
+         var script = document.createElement('script');
+         script.type = 'text/javascript';
+         script.src = filename;
+         head.appendChild(script);
+      }
+      if (typeof fileref != "undefined") document.getElementsByTagName("head")[0].appendChild(fileref)
+   }
+      </script>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,452 @@
+/*====== New Admin Styles ======*/
+.headingWrap{
+	width:100%;
+}
+.headingWrap h4{
+	text-align:center;
+	margin:13px 0;
+	color: #febc3c;
+}
+.stTime{
+	width:100%;
+	float:left;
+}
+.fullRow{
+	width:100%;
+}
+.paddNone{
+	padding:0 !important
+}
+.stTime .ads{
+	width:100%;
+	float:left;
+	height:100px;
+}
+.sub{
+	float:left;
+	width:100%;
+	color:#febc3c;
+	text-transform:uppercase;
+	height:20px;
+	font-size:14px;
+	margin:13px 0;
+}
+.half{
+	width:49% !important;
+}
+.sdateTime{
+	width:100%;
+	float:left;
+	height:auto;
+}
+.sdateTime li{
+	float:left;
+}
+.sdateTime li:nth-child(1){
+	width:32%;
+	padding-right:1%;
+}
+.sdateTime li:nth-child(2){
+	width:32%;
+	padding-right:1%;
+}
+.sdateTime li:nth-child(3){
+	width:32%;
+	padding-right:1%;
+}
+.sdateTime li:nth-child(4){
+	width:4%;
+}
+.sdateTime li:nth-child(4) a{
+	margin-top:5px;
+	text-align:right;
+}
+.aproveCust{
+	width:100%;
+	float:left;
+	height:auto;
+	text-align:center;
+}
+.aproveCust p{
+	font-size:15px;
+	font-weight:400;
+}
+.ap-bot{
+	height:60px;
+	width:100%;
+	float:left;
+	border-top:1px dotted rgba(255,255,255,0.1);
+	background:rgba(255,255,255,0.07);
+	line-height:60px;
+	font-size:12px;
+	text-align:center;
+	color:#707070;
+}
+.ap-bot aside{
+	height:60px;
+	float:left;
+}
+.ap-bot aside img{
+	margin-top:13px;
+	opacity:0.6;
+}
+.ap-bot aside img:hover{
+	opacity:1;
+}
+.ap-bot aside:nth-child(1){
+	border-right:1px solid rgba(255,255,255,0.07);
+	width:10%;
+}
+.ap-bot aside:nth-child(2){
+	width:80%;
+	text-align:center;
+}
+.ap-bot aside:nth-child(3){
+	border-left:1px solid rgba(255,255,255,0.07);
+	width:10%;
+}
+.ap-bot aside.mdbt a{
+	width:48%;
+}
+.selectLocations{
+	width:100%;
+	float:left;
+	height:auto;
+	margin-top:30px;
+}
+.selectLocations ul li{
+	width:auto;
+	padding-right:30px;
+	float:left;
+}
+.selectLocations ul li .inp{
+	float:left;
+	width:20px;
+	height:20px;
+	margin:0 5px 0 0;
+}
+.selectLocations ul li p{
+	float:left;
+	margin:-2px 0 0 0;
+}
+
+.custNam{
+	width:100%;
+	float:left;
+}
+.custNam ul{
+	width:100%;
+	float:left;
+}
+.custNam li{
+	width:100%;
+	float:left;
+	margin-bottom:10px;
+	padding-bottom:10px;
+	border-bottom:1px solid rgba(255,255,255,0.04)
+}
+.custNam ul li .inp{
+	float:left;
+	width:20px;
+	height:20px;
+	margin:0 5px 0 0;
+}
+.custNam ul li p{
+	float:left;
+	margin:-2px 0 0 0;
+	padding:0px;
+}
+.decustNam{
+	width:100%;
+	float:left;
+	background:rgba(255,255,255,0.02);
+	border:1px solid rgba(255,255,255,0.02);
+	padding:15px;
+}
+.decustNam p{
+	font-size:14px;
+	line-height:24px;
+}
+.restMenu{
+	width:100%;
+	float:left;
+}
+.restMenu ul .ulseWrap{
+	width:100%;
+	float:left;
+	height:auto;
+}
+.restMenu ul .ulseWrap .intit{
+	width:100%;
+	float:left;
+	height:auto;
+	border: 1px solid rgba(255,255,255,0.05);
+	background: rgba(255,255,255,0.08);
+	margin-bottom:4px;
+	padding:7px;
+}
+.restMenu ul .ulseWrap .inner-intit{
+	width:100%;
+	float:left;
+	height:auto;
+	border: 1px solid rgba(255,255,255,0.1);
+	padding:7px;
+}
+.restMenu ul .ulseWrap .inner-intit .sub{
+	float: left;
+	width: 100%;
+	color: #febc3c;
+	text-transform: none;
+	height: 13px;
+	font-size: 14px;
+	margin-bottom: 16px;
+	margin-top:0px;
+	line-height: 14px;
+}
+.restMenu ul .ulseWrap .inDelete{
+	background:url(../images/icon-delete.png) center top no-repeat;
+	width:20px;
+	height:20px;
+	float:right;
+	opacity:0.5;
+}
+.restMenu ul .ulseWrap .inDelete:hover{
+	opacity:0.8;
+	cursor:pointer;
+}
+.restMenu ul .ulseWrap .inDelete.inDeleteSub{
+	position:absolute;
+	top: 10px;
+	right: 8px;
+}
+
+.restMenu ul .ulseWrap .inEdit{
+	background:url(../images/icon-edit.png) center top no-repeat;
+	width:20px;
+	height:20px;
+	float:right;
+	opacity:0.5;
+	margin-right:10px;
+}
+.restMenu ul .ulseWrap .inEdit:hover{
+	opacity:0.8;
+	cursor:pointer;
+}
+.restMenu ul .ulseWrap .inEdit.inEditSub{
+	position:absolute;
+	top: 10px;
+	right: 8px;
+}
+
+/* For deleteing Inner Listings*/
+.restMenu ul .ulseWrap .inDeleteInnerSub{
+	background:url(../images/icon-delete.png) center top no-repeat;
+	width:20px;
+	height:20px;
+	float:right;
+	opacity:0.5;
+}
+.restMenu ul .ulseWrap .inDeleteInnerSub:hover{
+	opacity:0.8;
+	cursor:pointer;
+}
+.restMenu ul .ulseWrap .inDeleteInnerSub.inDeleteInnerSub{
+	position:absolute;
+	top: 10px;
+	right: 8px;
+}
+
+.restListings{
+	width:100%;
+	float:left;
+}
+.restListings li{
+	width:100%;
+	float:left;
+	background:rgba(255,255,255,0.02);
+	border:1px solid rgba(255,255,255,0.02);
+	padding:10px;
+	margin-bottom:5px;
+	margin-top:5px;
+	position:relative;
+	text-transform: capitalize;
+}
+.restListings li h6{
+	font-size:16px;
+	color:#fff;
+	padding:0px;
+	margin:0px;
+}
+.restListings li p{
+	font-size:12px;
+	color:rgba(255,255,255,0.7);
+	padding:0px;
+	margin:0px;
+}
+
+/* Home Delivery Dropdown Css */
+.usernewrestaurant h6{
+	margin-bottom:8px !important;
+	width:100%;
+}
+.usernewrestaurant p{
+	float: left;
+	margin-bottom: 5px !important;
+}
+.ui-widget-content {
+	background:#c3916c !important;
+	color: #fff !important;
+}
+.ui-menu{
+	padding:0px !important;
+}
+.ui-menu-item{
+	padding:5px !important;
+}
+.ui-state-focus {
+	border:0px !important;
+	background: #f87424 !important;
+	font-weight: normal;
+	color: #fff !important;
+}
+.activeRest{
+	border:1px solid #47a447 !important;
+}
+.deactiveRest{
+	border:1px solid #d2322d !important;
+}
+.addtoLocation{
+	background:url(../images/icon-tick.png) center center no-repeat #453a37;
+	width:32px;
+	height:32px;
+	border:1px solid rgba(255,255,255,0.05);
+	float: right;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+.addtoLocation:hover{
+	background:url(../images/icon-tick.png) center center no-repeat #5cb85c;
+	cursor:pointer;
+}
+.addtoLocation-Active{
+	background-color:#5cb85c;
+}
+.bk-bt{
+    position: relative;
+    margin-top: -38px;
+    margin-bottom: 10px;
+}
+.grayOut-Rest{
+   background: rgba(255,255,255,0.2);
+}
+.grayOut-Rest h6,
+.grayOut-Rest p{
+	opacity: 0.4;
+}
+.grayOut-Rest .inDeleteInnerSub{
+	opacity: 0.2 !important;
+}
+
+
+
+
+.currentOrdersWrapper{
+	width:100%;
+	float:left;
+	height:auto;
+}
+.currentOrdLink{
+	color: #febc3c;
+	text-decoration: none;
+	font-size: 14px;
+	text-align: center;
+	margin: 20px 0px;
+	width: 100%;
+	float: left;
+}
+.currentOrdLink:hover{
+	cursor:pointer;
+	color: #febc3c;
+	opacity:0.9
+}
+.currentOrdLink:before{
+	content:'';
+	background:url(../images/icon-cart16.png) left center no-repeat;
+	width: 18px;
+	height: 19px;
+	position: absolute;
+	margin-left: -25px;
+}
+.currentOrdersUl{
+	width:100%; float:left; height:auto;
+}
+.currentOrdersUl li{
+	width:100%; float:left; height:auto;
+}
+.currentOrdersUl li .currentOrderRow{
+	width: 100%;
+	float: left;
+	height: auto;
+	border: 1px solid rgba(255,255,255,0.05);
+	background: rgba(255,255,255,0.08);
+	margin-bottom: 4px;
+	padding: 5px 10px;
+}
+.currentOrdersUl li .currentOrderRow aside{
+	width:auto;
+	float:left;
+	width:auto;
+	margin-right:30px;
+	line-height:30px;
+}
+.currentOrdersUl li .currentOrderRow aside.sts{
+	text-align:left;
+	margin-right:0px;
+	float:left;
+}
+@media (max-width: 768px) {
+	.currentOrdersUl li .currentOrderRow aside{
+		width:100%;
+	}
+}
+.currentOrdersUl li .currentOrderDetailsWrap{
+	width:100%;
+	float:left;
+	height:auto;
+	margin-bottom:5px;
+}
+
+/* Newly added 15th Oct ---------- */
+
+.homeDeliveryInnerMain{
+	width:100%;
+	float:left;
+	height:auto;
+}
+#homedel.icon-home-1:before{
+	font-size: 17px;
+	margin-right: 15px;
+	color:#c6e4e8;
+}
+
+.restaurantmenuNew,
+.addNewAddressNew{
+	float: left;
+	width: 100%;
+	margin-top: 40px;
+	padding: 25px;
+}
+
+.newaddressdiv{
+	width:100%;
+	float:left;
+	height:auto;
+	padding:25px;
+}
+
+#newaddressdiv .icon-plus:before{
+	font-size: 18px;
+	margin-right: 15px;
+	color:#c6e4e8;
+}

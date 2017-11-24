@@ -1,0 +1,176 @@
+
+<html>
+	<head>
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, user-scalable=no" />
+			<meta name="description" content="">
+			<meta name="author" content="">
+			<meta http-equiv='cache-control' content='no-cache' />
+			<meta http-equiv='expires' content='0' />
+			<meta http-equiv='pragma' content='no-cache' />
+			<title>Lot Easy</title>
+		
+			<!---Style Sheets------------------------->
+			<link href="css/bootstrap.css" rel="stylesheet" media="screen" />
+			<link href="css/styles.css" rel="stylesheet" media="screen" />
+			<link href="css/theme.css" rel="stylesheet" media="screen" />
+			<link href="css/fontello.css" rel="stylesheet" media="screen" />
+			<link rel="stylesheet" href="css/jquery-ui.css" />
+
+			<!---Dependencies------------------------->
+
+			<script type="text/javascript" src="cordova.js"></script> 
+			<script src="js/jquery-1.9.1.js"></script>
+			<script src="js/jquery.min.js"></script>
+			<script src="js/bootstrap.min.js"></script>
+			<script src="js/jquery-1.10.2.js"></script>
+			<script src="js/url.js"></script>
+			<script src="js/billingorder.js"></script>
+			<script src="js/jquery-ui.js"></script>
+			<script type="text/javascript" src="js/bigradiobutton.js"></script>
+	
+		
+	</head>
+	<body>
+			<div class="DarkBg">
+				<!--Header Section-->
+				<header class="headerWrap">
+					<div class="tpLogoSection">
+						<a id="homeicon" class="tpBN-lt icon-home-1" ></a>
+						<div class="tpPageHeading">
+							<div class="inheadLogo" style="display: block;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">Lot Easy</div>
+						</div>
+						<a id="logout" class="tpBN-rt icon-logout"></a>
+					</div>
+				</header> 
+				
+				<!--Time and Date Section-->
+				<section class="headSubDtls">
+					<ul>
+						<li class="theatreName"><label id="vendorname" title="Vendor Name">Vendor Name</label></li>
+						<li class="screenNo"><label id="locationname" title="Vendor Name" style="display: block;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">Location Name</label></li>
+						<li class="dateTime"><label id="vendorusername" title="Vendor Name">User Name</label></li>
+					</ul>
+				</section>
+				<!--Time and Date Section-->
+				
+				
+				<!-- Content Section -->
+				<div class="contentWrap">
+					<div class="contentWrap_inner">
+                         <h4 class="h4Head text-uppercase text-center pull-left">Billing Order</h4>
+						<input type="button" class="btn btn-primary btn-sm pull-right" style="margin-top:15px;" value="Reset Taxes" id="reset"/>
+                        <div class="TableWrapper-DarkGray">
+                            <table class="values" id="my_table" width="100%">
+                                <thead>
+                                  <tr class="headerTr">
+                                    <td style="width:33%">SWAP</td>
+                                    <td style="width:33%">ITEM NAME</td>
+                                    <td style="width:33%">STATUS</td>
+                                  </tr>
+                                </thead>
+                               <!--<td class="statusss"></td>-->
+                            </table>
+                        </div>
+				
+						<!--<select style="width:100%" id="Discount" >
+						</select>
+						<select style="width:100%" id="Service Charge" >
+						 
+						</select>
+						<select style="width:100%" id="Service Tax" >
+						 
+						</select>
+						<select style="width:100%" id="VAT" >
+						  
+						</select>
+						<select style="width:100%" id="OtherTax" >
+						  
+						</select>
+						<select style="width:100%" id="OtherTax1" >
+						  
+						</select>
+						<select style="width:100%" id="ConvenientCharge" >
+						  
+						</select>
+						<select style="width:100%" id="DeliveryCharge" >
+						  
+						</select>-->
+					
+						
+						</br></br>
+						<center>
+					
+							
+						<input type="button" value="Update" id="Update" class="btn btn-primary FullWidth btn-marg20" />
+                        <!--<input type="button" value="Edit" id="edit" class="btn btn-primary FullWidth btn-marg20" />-->
+						<input type="button" value="updateitem" id="UpdateItem" class="btn btn-primary FullWidth btn-marg20"/>
+					</div>
+					
+					<div class="contentWrap_inner" style="padding:25px 0px;">
+                    	<ul class="values2 selectTaxes_name" id="my_table2" style="width:100%; float:left"></ul>
+                        <div class="values3 selectTaxes_name" id="my_table3" style="width:100%; float:left"></div>
+                        <input type="button" value="Update" id="submit" class="btn btn-primary FullWidth btn-marg20" />
+                        <input type="button" value="Submit" id="Update2"  class="btn btn-primary FullWidth btn-marg20" />
+						<input type="button" value="Update" id="Update3"  class="btn btn-primary FullWidth btn-marg20" />
+                    </div>
+
+				</div>
+				
+			</div>
+		   <!----Loading Image--------->
+			<div id="loader" class="loaderMain">
+					<div class="loading_inner"><img src="images/loader.gif"/></div>
+			</div>
+	</body>
+	<!--
+	<style>
+		.binOrder #my_table1 tr{
+			background: rgba(0,0,0,0.1);
+border-bottom: 1px solid rgba(0,0,0,0.3);
+		}
+		.binOrder #my_table1 tr th{
+		padding: 8px 0;
+		font-weight: normal;
+		text-transform: uppercase;
+		font-size: 13px;
+		}
+		
+		.binInTr td{
+			padding-top: 10px;
+			width:100%;
+		}
+		
+		.binInTr td.binInTr_frstTd{
+			width:90%
+		}
+		.binInTr td.binInTr_frstTd table tr td{
+			padding:5px;
+		}
+		.binInTr td.binInTr_frstTd table tr td .binInput{
+			color:#000;
+			width:15%;
+		}
+		.binInTr td.binInTr_frstTd table tr td:nth-child(1){
+			width:10% !important;
+		}
+		.binInTr td.binInTr_frstTd table tr td:nth-child(2){
+			width:40% !important;
+		}
+		.binInTr td.binInTr_frstTd table tr td:nth-child(3){
+			width:40% !important;
+		}
+		
+		.binInTr td.binInTr_secdTd{
+			width:10%;
+			vertical-align: top;
+			text-align: center;
+		}
+		.binInTr td.binInTr_secdTd input{
+			margin-bottom: 34px;
+		}
+	</style>
+    -->
+	
+</html>

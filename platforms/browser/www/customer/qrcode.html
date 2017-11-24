@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+   <body>
+      <div data-role="page" class="ordermysnack" data-quicklinks="true" id="qrcodepage" data-dom-cache="false">
+      
+         <!-- Header Start -->        
+         <div data-role="header"  data-position="fixed" class="oms-header">
+            <div class="header_left">
+               <a href="" class="header-icons qrpagehomearrow"><img src="images/header_icon_arrow.png" alt=""/></a>
+            </div>
+            <h1 class="headerLogo headerLogoWith">Scan QR Code</h1>
+            <div class="header_right">
+               <a href="#rightpanelforqrpage" data-pagename="rightpanelforqrpage"   class="header-icons icon-menu rightpanelclass"></a>
+            </div>
+         </div>
+         <!-- Content Start -->
+
+         <div role="main" class="ui-content oms-content">
+		 <form id="qrform" name="qrform" >
+            <div class="qrcode_errorWrap">
+               <!--<h3 class="qrcodeError">QR code not properly scan,<br>
+                  Please click on the rescan button</h3>-->
+               <div class="row-fluid" style="text-align: center; margin: 20px 0px;">
+                  <p>Scan QR code near you to browse the menu and place your order right away!</p>
+               </div>
+            
+               <button id="scanqrcode" class="btn btn-a  scanqrcode">
+				  <span class="ui-button-text">Scan QR Code</span>
+				</button>
+				
+               <div id="manualdiv" style="display:none">
+                  <div class="orDivider">
+                     <span>or</span>
+                     <hr class="hr"></hr>
+                  </div>
+                  <div class="row-fluid" style="text-align: center; margin: 20px 0px;">
+                     <h4 class="h3_head">Enter details manually</h4>
+                  </div>
+                  <div class="row-fluid">
+                     <label class="fieldLabel">I am at</label>
+                     <input type="text" id="iamat"  name="iamat" onkeypress="return nospecialCharacters(event)" required/>
+                     <div class="autoSearch_result_Wrap" id="iamatsearch" name="iamatsearch"></div>
+                  </div>
+                  <div class="row-fluid">
+                     <label class="fieldLabel">Table No.</label>
+                     <input type="text" id="tablenum"  name="tablenum" onkeypress="return nospecialCharacters(event)" required/>
+                  </div>
+                  <input type="hidden" id="vid"  />
+                  <button class="btn btn-a qrsubmit">Submit</button>
+                  <input type="button"  class="btn btn-a qrcodesubmit row-fluid" onclick="qrcode()" value="Submit"  />
+               </div>
+            </div>
+            <div class="row">
+			</form>
+            </div>
+            <!-- Full Name Help -->
+            <div data-role="popup" id="vendornotexistspop"  class="ui-content" data-theme="a">
+               <div class="popup_inner popup_sm">
+                  <div class="popup_content">
+                     <i class="noclass"></i>
+                     <p>The Vendor doesn't Exist In our Database</p>
+                  </div>
+                  <div class="popup_footer vendornotexistsclose">
+                     <a>Ok</a>
+                  </div>
+               </div>
+            </div>
+            <!-- Mobile Number Help -->
+            <div data-role="popup" id="mobilenumberHelp"  class="ui-content" data-theme="a">
+               <div class="popup_inner popup_sm">
+                  <div class="popup_content">
+                     <i class="pop_tooltipIcon icon-help"></i>
+                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+                  </div>
+                  <div class="popup_footer">
+                     <a>Ok</a>
+                  </div>
+               </div>
+            </div>
+            
+         <!-- madhu changed---->
+
+            <div data-role="popup" id="qrerror" data-history="false"  class="ui-content" data-theme="a">
+               <div class="popup_inner popup_sm">
+                  <div class="popup_content">
+                     <i class="pop_tooltipIcon icon-help"></i>
+                     <p>We are unable to scan - Please try again</p>
+                  </div>
+                  <div class="popup_footer">
+                     <a id="okay" >Ok</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div data-role="popup" data-history="false"  id="recentOrdersforqrpage"  class="ui-content" data-theme="a"></div>
+         <!-- rightpanel1  -->
+         <div data-role="panel" id="rightpanelforqrpage" data-position="right" data-display="reveal" data-theme="b">
+            <div class="ui-panel-inner">
+               <div class="tpMenuWrap">
+                  <a href="#demo-links" data-rel="close" class="icon-cancel-circled-1 panelCloseBtn"></a>
+                  <ul class="ul_menu">
+                     <li><a>My Recent Orders</a></li>
+                  </ul>
+                  <div class="recentOrderslistWrap">
+                  </div>
+               </div>
+               <div class="btMenuWrap">
+                  <ul class="ul_menu">
+                     <li><a  id="aboutloteasy">About Lot Easy</a></li>
+                     <li><a id="aboutloteasyfaqs">FAQs</a></li>
+                      <li><a id="contactus">Contact Us</a></li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+         
+         	 <!-- Contact us   Popup  -->
+      <div data-role="popup"  id="contactuspopup" class="ui-content" data-theme="a">
+        <div class="popup_inner popup_sm">
+            <div class="popup_content popup_myactivelabels_content">
+                <p style="font-size:13px" >Please contact us at support@Loteasy.com</p>
+                
+                <p class="popuptextfordelivery"></p>
+            </div>
+            <div class="popup_footer closepopupfordelivery"><a id="closepop">Ok</a>
+
+            </div>
+        </div>
+     </div>
+     <div id="loaderforqr" class="loaderMain">
+		<div class="loading_inner"><img src="images/loader.gif"/></div>
+	 </div>
+      <script type="text/javascript">
+
+     var jsondata;
+  var UUID = '';
+  var cust_id = '';
+  $("#qrcodepage").on("pagebeforeshow", function(event)
+  {
+	      
+
+if (typeof qrloaded == 'undefined')
+         {
+          $.getScript('js/qrcode.js', function(data, textStatus, jqxhr) {
+ // commonfunctionalityforqrcode();
+    qrcodefunctionaity();    
+        });
+         }
+         else
+          {
+            //commonfunctionalityforqrcode();
+        qrcodefunctionaity();    
+          }
+    $(".qrcodesubmit").hide();
+    UUID = getParameterByName('UUID');
+    cust_id = getParameterByName('cust_id');
+    event.stopImmediatePropagation();
+    event.preventDefault();
+    return false;
+});
+  function backButtonCallback()
+  {
+    $(":mobile-pagecontainer").pagecontainer("change", "start.html?UUID=" + UUID + '&cust_id=' + cust_id,
+    {
+       allowSamePageTransition:true,reload:true 
+    });
+    return false;
+  }
+
+
+
+
+
+     </script>
+  </div>
+</body>
+</html>

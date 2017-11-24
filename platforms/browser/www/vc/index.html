@@ -1,0 +1,478 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Lot Easy</title>
+    <link href="css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="css/styles.css" rel="stylesheet" media="screen">
+    <link href="css/theme.css" rel="stylesheet" media="screen">
+	
+    <link href="css/fontello.css" rel="stylesheet" media="screen">
+   <!-- <link rel="stylesheet" href="css/swiper.css">-->
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+
+    <link href="css/bootstrap-toggle.min.css" rel="stylesheet">
+	
+    <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />-->
+    <style>
+
+	   .pclass {
+    margin: 0em 0 0;
+}
+
+        .price
+        {
+            display: block;
+        }
+    </style>
+
+	 <script src="cordova.js"></script>
+    <!--<script src="http://code.jquery.com/jquery-1.9.1.js"></script>-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!--<script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>-->
+	<script type="text/javascript" src="js/accordian/jquery-1.9.1.js"></script>
+	 <script type="text/javascript" src="js/jquery.tablesorter.js"></script>
+	
+    <script src="js/jquery.jsort.js"></script>
+    <!--<script type="text/javascript" src="js/accordian/jquery-1.9.1.js"></script>-->
+    <script type="text/javascript" src="js/url.js"></script>
+    <script type="text/javascript" src="js/accordian/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/jstorage.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <!--<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.3.css" />
+	<script src="js/jquery.mobile-1.4.3.js"></script>-->
+	
+	
+	<style>
+					.toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; right:10px; }
+					.toggle.ios .toggle-handle { border-radius: 20px; }
+					.toggle.android { border-radius: 20px; right:10px;}
+					.toggle.android .toggle-handle { border-radius: 20px; }
+				</style>
+				
+</head>
+<body onload="getCaptcha();">
+
+<div class="DarkBg" id="logindiv" style="display: none">
+    <!--Header Section-->
+    <header class="headerWrap headerWrap_positionFixed">
+        <div class="tpLogoSection">
+        	<a class="backbutton tpBN-lt icon-left-open" id="homeiconback" onclick="NavigateBack();" style="display:block !important"></a>
+            <a id="homeicon" class="tpBN-lt icon-home-1 logo-inner" ></a>
+            <div class="tpPageHeading">
+                <div class="inheadLogo" style="display: block;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">Lot Easy</div>
+            </div>
+			
+			
+			
+            <a id="logout" class="tpBN-rt icon-logout logoutIcon-header"></a>
+            <!--<a class="tpBN-rt"><img src="images/icon-logout.png" alt=""></a>-->
+        </div>
+    </header>
+    <section class="headSubDtls">
+        <ul>
+            <li class="vendorname"></li>
+            <li class="locationname" ></li>
+            <li class="vendorusername"></li>
+        </ul>
+    </section>
+    <!--<section class="headSubDtls">
+            <ul>
+                <li><label class="vendorname" title="Vendor Name">Vendor Name</label></li>
+                <li><label class="locationname" title="Vendor Name" style="display: block;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">Location Name</label></li>
+                <li><label class="vendorusername" title="Vendor Name">User Name</label></li>
+            </ul>
+    </section>-->
+    <!-- Content Section -->
+    <div class="contentWrap">
+    	<div class="contentWrap_inner">
+            <h4 class="h4Head text-uppercase text-center">Verification Code</h4>
+            <div class="fields-varifCode custom-fields loginFieldWrap">
+                <input type="text" id="vcode" placeholder="Enter Verification Code">
+                <div class="FullWidth pull-left">
+                    <form name="randform" class="capthaWrap">
+                    <table width="100%">
+                        <tr>
+                            <td align="left" valign="middle" width="100%" colspan="2">
+                                <input type="text" id="txtcode" class="captha_input" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" valign="middle" width="50%">
+                                <div id="captcha">
+                                    <div id="captcha_gen">
+                                        <label align="center" id="randomfield" class="captha-img">
+                                        </label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td align="left" valign="middle" width="50%">
+                                <div type="button" class="iconbtn-refresh icon-ref" onclick="getCaptcha();">
+                                    &nbsp;</div>
+                            </td>
+                        </tr>
+                    </table>
+                    <!--<a type="button" id="chkCaptcha" value="Submit" class="Captcha-success pull-left margin-t20">Submit</a>-->
+                    <a type="button" id="chkCaptcha" value="Submit" class="btn btn-primary FullWidth text-uppercase fillBtn">
+                        Submit</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+</div>
+    
+    
+    
+    <div class="DarkBg" id="inhouse" style="display: none">
+        <!--Header Section-->
+        <header class="headerWrap headerWrap_positionFixed">
+				<div class="tpLogoSection">
+                	<a class="backbutton tpBN-lt icon-left-open" id="homeiconback1" onclick="NavigateBack();" style="display:block !important"></a>
+                    <a id="homeicon" class="tpBN-lt icon-home-1 logo-inner" ></a>
+                    <!--<a class="tpBN-lt icon-angle-left" onclick="back()">Back</a>-->
+					<div class="tpPageHeading">
+						<div class="inheadLogo" style="display: block;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">Lot Easy</div>
+					</div>
+					<a id="logout" class="tpBN-rt icon-logout logoutIcon-header"></a>
+                    <!--<a class="tpBN-rt"><img src="images/icon-logout.png" alt=""></a>-->
+				</div>
+			</header>
+        <section class="headSubDtls">
+				<ul>
+					<li class="vendorname"></li>
+					<li class="locationname" ></li>
+					<li class="vendorusername"></li>
+				</ul>
+			</section>
+        <!--<section class="headSubDtls">
+				<ul>
+					<li><label class="vendorname" title="Vendor Name">Vendor Name</label></li>
+					<li><label class="locationname" title="Vendor Name" style="display: block;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">Location Name</label></li>
+					<li><label class="vendorusername" title="Vendor Name">User Name</label></li>
+				</ul>
+			</section>-->
+        <!-- Content Section -->
+        <div class="contentWrap" id="takewrap">
+            <div class="contentWrap_inner">
+                <h4 class="h4Head text-uppercase">
+                    Place Order (In house vendor)</h4>
+                <div class="fields-varifCode custom-fields" id="showscreen">
+                    <!--<input type="text" id="theaterName" placeholder="Write Screen Name" value="3">-->
+                    <select name="" id="SCname">
+                        <option>Write Screen Name</option>
+                    </select>
+                    <input type="text" id="row" placeholder="Write Row" onkeypress="return row()" >
+                    <input type="text" id="seat" placeholder="Write Seat No."  onkeypress="return seat()">
+                    <div id="orderActionDiv" class="TwoBtns-wrap fillBtn">
+                        <a href="#" class="btn btn-primary" id="loginVendor">Proceed</a> <a href="#" class="btn btn-secondary"
+                            id="cancel">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+        <!-- Advertisement Section -->
+        <section class="advertiseWrap" id="inhouseadd" style="display: none">Advertisement</section>
+    </div>
+    <div class="DarkBg" id="mainscr" style="display: none">
+        <!--Header Section-->
+        <header class="headerWrap headerWrap_positionFixed">
+            	<div class="tpLogoSection">
+                	<a class="backbutton tpBN-lt icon-left-open" id="homeiconback2" onclick="NavigateBack();" style="display:block !important"></a>
+                    <a id="homeicon" class="tpBN-lt icon-home-1 logo-inner" ></a>
+                    <!--<a class="tpBN-lt icon-angle-left" onclick="back()">Back</a>-->
+					<div class="tpPageHeading">
+						<div class="inheadLogo" style="display: block;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">Lot Easy</div>
+					</div>
+					<a id="logout" class="tpBN-rt icon-logout logoutIcon-header"></a>
+                    <!--<a class="tpBN-rt"><img src="images/icon-logout.png" alt=""></a>-->
+				</div>
+			</header>
+        <section class="headSubDtls">
+				<ul>
+					<li class="vendorname"></li>
+					<li class="locationname" ></li>
+					<li class="vendorusername"></li>
+				</ul>
+			</section>
+        <!--<section class="headSubDtls">
+				<ul>
+					<li><label class="vendorname" title="Vendor Name">Vendor Name</label></li>
+					<li><label class="locationname" title="Vendor Name" style="display: block;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">Location Name</label></li>
+					<li><label class="vendorusername" title="Vendor Name">User Name</label></li>
+				</ul>
+			</section> -->
+        <!--Menu Section-->
+        <section class="menuWrap">
+				<div class="menuInner">
+					<div class="swiper-container">
+						<ul id="swiper-wrapper" class="swiper-wrapper">
+						</ul>
+					</div>
+				</div>
+			</section>
+        <!-- Content Section -->
+        <div class="contentWrap" id="mainorder" style="display: none">
+            <div class="contentWrap_inner">
+                <div id="myordersdiv">
+                    <ul>
+                        <li class="myorderhead">
+                            <h5>
+                                My Orders <i class="myorderhead22"></i>
+                            </h5>
+                        </li>
+                        <div id="ordersdiv" style="display: none">
+                            <div class="confirmorder-row">
+                                <a id="ordersconfirm" hrer="#" class="btn btn-confirmorder">confirm order</a>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+                <!-- Accordian Section -->
+                <div id="tab-dock" class="accordian">
+                </div>
+            </div>
+        </div>
+		
+    </div>
+    <div class="DarkBg" id="VendorOrder" style="display: none">
+        <!--Header Section-->
+        <header class="headerWrap headerWrap_positionFixed">
+				<div class="tpLogoSection">
+				    <a class="backbutton tpBN-lt icon-left-open" id="homeiconback"  style="display:block !important"></a>
+                    <a id="homeicon" class="tpBN-lt icon-home-1 logo-inner" ></a>
+                    <!--<a class="tpBN-lt icon-angle-left" onclick="back()">Back</a>-->
+					<div class="tpPageHeading">
+						<div class="inheadLogo" style="display: block;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">Lot Easy</div>
+					</div>
+					<div class="notifiOnOff">
+						<input type="checkbox"  data-toggle="toggle" data-style="android" data-onstyle="success" data-size="small" id="toggle" >
+					</div>
+                    <a id="logout" class="tpBN-rt icon-logout logoutIcon-header"></a>
+                    <!--<a class="tpBN-rt"><img src="images/icon-logout.png" alt=""></a>-->
+				</div>
+			</header>
+        <section class="headSubDtls">
+				<ul>
+					<li class="vendorname"></li>
+					<li class="locationname" ></li>
+					<li class="vendorusername"></li>
+				</ul>
+			</section>
+        <!-- Content Section -->
+        <section class="vendorMenu" id="homeMenu">
+            <ul class="test">
+                <li class="status orderli-new" id="TakeOrder">Take Order</li>
+                <li class="status orderli-new" id="mymenu">My Menu</li>
+				<li id="itemavailabile"  class="status orderli-ready">Item Availablility</li>
+                <li class="status orderli-new" id="New">New(0)</li>
+                <li class="status orderli-viewed" id="NewandViewed">New and Viewed(0)</li>
+                <li class="status orderli-accepted" id="Accepted">Accepted(0)</li>
+                <li class="status orderli-ready" id="Ready">Ready(0)</li>
+                <li class="status orderli-pickedup" id="PickedUp">Picked Up(0)</li>
+                <li class="status orderli-deliverd" id= "Delivered">Delivered(0)</li>
+                <li class="status orderli-closed" id="Closed">Closed(0)</li>
+                 <li class="status orderli-rejected" id="Cancelled">Cencelled(0)</li>
+                <li class="status orderli-rejected" id="Rejected">Rejected(0)</li>
+            </ul>
+        </section>
+        <div class="contentWrap" style="margin: 0px; height: auto" id="takeorderss" >
+            
+            <div class="contentWrap_inner">
+                	
+                <section id="orders" style="margin-top: 10px;">
+						<div class="OrdersTable TableWrapper-DarkGray" id="ordtable" style="padding:0px 25px 25px 25px">
+                        	<h4 id="orderheader" class="h4Head"></h4>
+							<div class="list"></div>
+						</div>
+					</section>
+                <div id="orderdetail" style="display: none">
+                
+                </div>
+				<section style="display:block" class="homeContent">
+					<div id="praveen" class="order-listdetails-wrap">
+					
+                        
+					</div>
+					<div class="TwoBtns-wrap" style="display: none;margin-bottom:20px">
+						<a href="#" class="btn btn-red btn-primary" id="acept">Accept</a>
+						<a href="#" class="btn btn-secondary" id="rej">Reject</a>
+					</div>
+					
+				</section>
+				<div  style="height: 100px; font-size: 0;line-height: 0;display:inline-block;margin-bottom:24px;margin-bottom:0px;">
+						
+					</div>
+					<div class="" style="" align="center">
+						<a id="back" href="#" style="width: 300px;" class="btn btn-secondary backbutton">Back</a>
+					</div>
+            </div>
+		</div>
+		 
+    </div>
+
+
+    <!-- Print Summery -->
+    <div class="printpage_body" id="printssss" style="display: none" >
+    	
+        <div class="printpage">
+            <!-- Header Section -->
+          	<div class="printHeader" style="text-align:center;">
+				<div class="rt_acts">
+	                    <a class="icon-cancel ic_cls" href="#" id="cancels" ></a>
+	             </div>
+                <div class="rest_head">
+                    <h1 class="rest_name"></h1>
+                    <h6 class="rest_adres"></h6>
+					<img src="images/print.png" class='print' id='printer'/>
+                </div>
+            </div>
+            <!-- Content Section -->
+            <div class="contentWrap">
+                <div class="contentWrap_inner">
+                    
+                    <div class="dtlsoftin">
+                        <div class="dtls_row">
+                            <li>Order No: <span id="orderid"></span></li>
+                            <li>Date: <span id="dateoforder"></span></li>
+                        </div>
+                        
+                        <div class="custmerAdres">
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="dtls_order">
+                    <div id="madhu">
+                        <h1 class="dtls_order_h1">Order Details</h1></div>
+                        <div class="dtls_order_table">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <table class="table" id="orderstable">
+                                            <thead style="background: #eee;">
+                                              <tr style="background: #eee;">
+                                                <th style="width:10%" class="thheads" >SI.No</th>
+                                                <th style="width:25%;text-align:left;" class="thheads">Item Description</th>
+                                                 <th style="width:20%" class="thheads">Rate ( <span class='WebRupee'>&#x20B9;</span> ) </th>
+                                                <th style="width:10%" class="thheads">Qty</th>
+                                                <th style="width:15%" class="thheads">Discount</th>
+                                                <th style="width:20%; text-align: right;" class="thheads">Amount ( <span class='WebRupee'>&#x20B9;</span> )</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                           
+                                            </tbody>
+                                          </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="dtls_order_total_wrap">
+                                            <table>
+                                                <tr>
+                                                    <td class="td_1"></td>
+                                                    <td class="td_2">
+                                                      <div class="dtls_order_total">
+                                                            
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                              </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            
+                        </div>
+                        
+                     
+                        <div class="dtls_order_ftr">
+                            <p class="converter">(Total Amount in words : Rupees <span id="amountInWords"></span>)<br>
+<span>(Note: Total Amount is inclusive of taxes and charges, as applicable for each individual item)</span>
+</p>
+                            
+                            <div class="dtlsoftin" style="margin:15px 0px">
+                                <div class="dtls_row">
+                                    <li id="tinumli">TIN No: <span id="tinnum"></span></li>
+                                    <li id="stnumli">S Tax No: <span id="stnum"></span></li><br>
+                                    <li id="vatnumli">VAT No: <span id="vatnum"></span></li>
+                                </div>
+                            </div>
+	                            
+                         
+                            <p class="text-center"><b>Thank you</b></p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Print Summery End -->
+     <!--error page for network connection-->
+	<div id="errornet1"  class="emptyMsg" style="display:none" >
+					<div class="emptyMsg_inner">
+						Please check your network connectivity and try again 
+						
+					
+						<center><button type="button"class="btn btn-primary" onclick="network1()">Ok</button></center>
+					</div>
+	</div>
+	   <!--error page for timeout error-->
+	<div id="errornet2"  class="emptyMsg" style="display:none" >
+					<div class="emptyMsg_inner">
+						Unable to connect to Lot Easy. Please check your network connectivity and try again.
+				
+						<center><button type="button"class="btn btn-primary" onclick="network()">Ok</button></center>
+					</div>
+	</div>
+	 <!--error page for network connection-->
+	<div id="errornet3"  class="emptyMsg" style="display:none" >
+					<div class="emptyMsg_inner">
+						Please check your network connectivity and try again 
+					
+						<center><button type="button"class="btn btn-primary" onclick="network()">Ok</button></center>
+					</div>
+	</div>
+	 <!--error page for network connection-->
+	<div id="takeordererror"  class="emptyMsg" style="display:none" >
+					<div class="emptyMsg_inner">
+						Please check your network connectivity and try again 
+						
+						<center><button type="button"class="btn btn-primary" onclick="takeorder()">Ok</button></center>
+						
+					</div>
+	
+	</div>
+	 <!--error page for timeout-->
+	<div id="takeordererror1"  class="emptyMsg" style="display:none" >
+					<div class="emptyMsg_inner">
+						Unable to connect to Lot Easy. Please check your network connectivity and try again.
+					
+						<center><button type="button"class="btn btn-primary" onclick="takeorder()">Ok</button></center>
+					</div>
+					
+	
+	</div>
+	
+	
+	
+					
+	
+	</div>
+    <div id="loader" class="loaderMain">
+        <div class="loading_inner">
+            <img src="images/loader.gif" /></div>
+    </div>
+
+	<script src="js/bootstrap-toggle.min.js"></script>
+</body>
+</html>

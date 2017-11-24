@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>OrderMySnack</title>
+
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css">
+    <link rel="stylesheet" href="css/jqm-demos.css">
+    <link rel="stylesheet" href="css/homedelivery_styles.css">
+    <link rel="stylesheet" href="css/fontello.css">
+    <link rel="stylesheet" href="css/customer_styles.css">
+    <script type="text/javascript" src="cordova.js"></script>  
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/lodash.min.js"></script>
+
+<script type="text/javascript" src="js/jquery.validate.js"></script>
+      <script type="text/javascript" src="js/additional-methods.js"></script>
+      <script type="text/javascript" src="js/jquery-ui.js"></script>  
+<script type="text/javascript" src="js/custom/customerjs/JSONQ.js"></script> 
+
+<script src="slider/js/swiper.min.js"></script>
+<script src="js/custom/customerjs/customerindex.js"></script>
+<script src="js/custom/customerjs/toppcrusts.js"></script>
+<script src="js/custom/customerjs/common.js"></script>
+<script src="js/custom/customerjs/Orders.js"></script>
+<script src="js/custom/customerjs/recentorders.js"></script>
+<script src="js/custom/url.js"></script>
+
+      <script type="text/javascript" src="js/allfiles.js"></script> 
+      
+      
+      
+       
+<script type="text/javascript">
+
+
+function onLoadcordava() {
+
+          document.addEventListener("deviceready", onDeviceReady, false);
+      }
+
+
+function onDeviceReady(){
+
+
+  document.addEventListener("backbutton", function(e) {
+    if ($.mobile.activePage.is('#itemssearchpage')) //main.html
+    {
+      backbuttoncallforsearchpage();
+    }
+    
+    else if ($.mobile.activePage.is('#customerpage')) //main.html
+    {
+      backbuttonforcustomerfunctionality();
+    }
+    else
+    {
+      return false;
+    }
+    
+    
+  }, false);
+
+
+}
+
+
+
+
+
+
+
+
+
+
+function backbuttonforcustomerfunctionality() {
+
+
+     var shownrnotpickpageback = localStorage.getItem('showpickitemspage');
+
+       if(shownrnotpickpageback==='no')
+      {
+      
+      
+   //   var urlforvendor = window.location.href;
+ //$("#customerpage .orderplaced_succclose").trigger("click");
+
+      return false;
+
+    }
+
+
+
+
+      if ($('.ui-popup-active').length) {
+      $("#customerpage .tickclose").trigger("click");
+      return false;
+    }
+
+     /*
+  if(!$('.ui-popup-active').length)
+    {
+     // $('[data-role="popup"]').popup("close");
+      $('.ui-popup').popup('close');
+    }
+    */
+ if ($(".ui-popup-active").length > 0) {
+
+ //	event.stopImmediatePropagation();
+ // event.preventDefault();
+  return false;
+       
+    } 
+    
+if($('#customerpage #loaderforindex').is(':visible'))
+{
+  
+return false;
+}
+
+    else
+    {
+ 
+  $( "#customerpage .pickitemshome" ).trigger( "click" );
+}
+  
+}
+
+
+ function backbuttoncallforsearchpage() {
+
+      
+
+     var shownrnotpickpageback = localStorage.getItem('showpickitemspage');
+
+
+
+       if(shownrnotpickpageback==='no')
+      {
+      
+      
+   
+
+      return false;
+
+    }
+
+
+      if($('#itemssearchpage #loaderforsearch').is(':visible'))
+      {
+          return false;
+      }
+
+        else
+        {
+   $('[data-role="popup"]').popup("close");
+   $("#itemssearchpage .pickitemshomesearch").trigger( "click");
+        }
+   
+    return false;
+}
+
+
+
+
+   
+$(document).ready(function() 
+{
+   $("#customerpage").remove();
+ var shownrnotpickpageready = localStorage.getItem('showpickitemspage');
+ 
+      if(shownrnotpickpageready==='no')
+      {
+        
+      var urlforvendor = window.location.href;
+  redirecttovendor();
+      return false;
+    }
+  if(screen_id==''||screen_id==null||screen_id=='undefined')
+               {
+                  
+            var     urlforvendor = window.location.href;
+ redirecttovendor();
+   return false;
+               }
+
+
+
+
+
+
+                function redirecttovendor()
+            {
+          $("#itemssearchpage #loaderforsearch").show();
+           sessionStorage.clear();
+                window.sessionStorage.setItem("isloggedIn", "yes");
+                localStorage.setItem('showpickitemspage', 'no');
+                   var urlforvendor = window.location.href;
+                  urlforvendor = decodeURIComponent(urlforvendor);
+  var url_params = urlforvendor.split('?');
+  window.location.replace('../vc/index.html?' + url_params[1]);
+                          
+                        return false;
+                }
+
+
+
+
+});
+
+   
+
+
+
+   </script>
+
+      
+      
+      
+   </head>
+   <body onload="onLoadcordava()">
+      <div data-role="page" class="ordermysnack" data-quicklinks="true" id="itemssearchpage" data-dom-cache="false">
+      <!-- Header Start -->
+      <div data-role="header" class="oms-header" style="position:fixed; width: 100%; z-index: 9;">        
+      <!--<div data-role="header" data-position="fixed" class="oms-header">-->
+         <div class="header_left">
+            <!-- <a href="" class="header-icons icon-left-big pickitemsback"></a>-->
+            <a href="" class="header-icons pickitemshomesearch"><img src="images/header_icon_arrow.png" alt=""/></a>
+         </div>
+         <h1 class="headerLogo headerLogoWith">
+            <span class="headvendnametextsearch">Search Items</span><br>
+            <!--<i><span class="headloctext">Location Name </span>  <span class="headscreentext">ScreenName</span></i>-->
+         </h1>
+         <div class="header_right">
+            <a class="header-icons icon-left-big searchBackbtnClass"></a>
+        </div>
+      </div>
+
+       <div data-role="popup"  data-history="false"  id="one_quantity"  class="ui-content" data-theme="a">
+            <div class="popup_inner popup_sm">
+                <div class="popup_content" style="text-align:center;">
+                    <p class="">Add atleast 1 quantity to choose Addons</p>
+                </div>
+                <div class="popup_footer one_quantityclose">
+                        <a class="">Ok</a>
+                </div>
+            </div>
+        </div>
+
+          <div data-role="popup" data-dismissible="false"  id="timeoutalertsearchpage" class="ui-content" data-theme="a">
+                <div class="popup_inner popup_sm">
+                    <div class="popup_content">
+                        <i class="pop_tooltipIcon"></i>
+                        <p id="timeoutalertmsg">Please check your network connectivity and try again</p>
+                    </div>
+                    <div class="popup_footer timeoutalertsearchpageclose">
+                        <a>Ok</a>
+                    </div>
+                </div>
+            </div>
+
+             <div data-role="popup"  data-dismissible="false" id="itemsearcherror" class="ui-content" data-theme="a">
+                <div class="popup_inner popup_sm">
+                    <div class="popup_content">
+                        <i class="pop_tooltipIcon"></i>
+                        <p id="itemsearcherrormsg">Oops! Please try again</p>
+                    </div>
+                    <div class="popup_footer itemsearcherrormsgclose">
+                        <a>Ok</a>
+                    </div>
+                </div>
+            </div>
+
+             <div data-role="popup" data-dismissible="false" id="notoppcrustsitemsearch"  class="ui-content" data-theme="a">
+            <div class="popup_inner popup_sm">
+                <div class="popup_content" style="text-align:center;">
+                    <p class="">No Addons Present For this Item</p>
+                </div>
+                <div class="popup_footer notoppcrustsitemsearchclose">
+                        <a class="">Ok</a>
+                </div>
+            </div>
+        </div>
+
+        <div data-role="popup" data-dismissible="false" id="one_quantityitemsearch"  class="ui-content" data-theme="a">
+            <div class="popup_inner popup_sm">
+                <div class="popup_content" style="text-align:center;">
+                    <p class="">Add atleast 1 quantity to choose Addons</p>
+                </div>
+                <div class="popup_footer one_quantityitemsearchclose">
+                        <a class="">Ok</a>
+                </div>
+            </div>
+        </div>
+      
+      <div role="main" class="ui-content oms-content" style="padding:0px; margin-top: 72px;">
+         <div class="searchResultWrap">
+            <div class="searchResultStik">
+	            <div class="searchResultinput">
+	               <input type="text" id="sr_input"  name="sr_input" placeholder="Search" onkeypress="return nospecialCharactersforsearch(event)"  required/>
+	            </div>
+            </div>
+
+            <div class="TreeMenu_Content search_cont_margin" id="searchTreeMenu_Content">
+            </div>
+         </div>
+      </div>
+
+       <div id="loaderforsearch" class="loaderMain">
+                    <div class="loading_inner"><img src="images/loader.gif"/></div>
+            </div>
+
+      <script type="text/javascript">
+		    var UUID = '';
+      var screen_id = '';
+    var cust_id = '';
+    var minimum_order = '';
+    var addreslabel = '';
+    var accessedfrom = '';
+    var tablenum = '';
+    var redirectedfrom = '';
+    var seatnum = '';
+    var row = '';
+     var  location_id = '';
+     var       vendortypeloggedin = '';
+     var      vendor_id = '';
+     var    VID = '';
+     var     vendor_name = '';
+     var    vendor_user_name = '';
+     var   vendorUserId = '';
+     var     sName = '';
+    var    customer_id = '';
+
+
+
+
+  $(document).on('pagebeforeshow', '#itemssearchpage', function(event)
+  {
+   $("#customerpage").remove();
+  	 $("#itemssearchpage #loaderforsearch").show();
+  	  $("#itemssearchpage #sr_input").after('<a class="icon-cancel search_btn_a"></a>');
+   $('#itemssearchpage .search_btn_a').hide();
+
+    for (var i = 0; i < sessionStorage.length; i++) {
+    var propertyName = sessionStorage.key(i);
+    var propertyvalue = sessionStorage.getItem(propertyName);
+    console.log(propertyName + '\t' + propertyvalue);
+    }
+
+     UUID = getParameterByName('UUID');
+     screen_id = getParameterByName('screen_id');
+     cust_id = getParameterByName('cust_id');
+     minimum_order = getParameterByName('minimum_order');
+     addreslabel = getParameterByName('addreslabel');
+     accessedfrom = getParameterByName('accessedfrom');
+     tablenum = getParameterByName('tablenum');
+     redirectedfrom = getParameterByName('redirectedfrom');
+
+     seatnum = getParameterByName('seatnum');
+     seatnum = encodeURIComponent(seatnum.trim());
+     row = getParameterByName('row');
+      row = encodeURIComponent(row.trim());
+
+              location_id = getParameterByName('location_id');
+              vendortypeloggedin = getParameterByName('vendortypeloggedin');
+              vendor_id = getParameterByName('vendor_id');
+              VID = getParameterByName('VID');
+              vendor_name = getParameterByName('vendor_name');
+              vendor_user_name = getParameterByName('vendor_user_name');
+              vendorUserId = getParameterByName('vendorUserId');
+              sName = getParameterByName('sName');
+              customer_id = getParameterByName('customer_id');
+
+
+        
+
+    if (typeof itemssearchpageloaded == 'undefined')
+    {
+        $.getScript('js/custom/customerjs/itemsearch.js', function(data, textStatus, jqxhr) {});
+    }
+    else
+    {}
+   $("#itemssearchpage #sr_input").autocomplete(
+    {
+        source: function(request, response)
+        {
+            var inputdata = $.trim($("#sr_input").val());
+            var preval = $.trim($("#sr_input").attr('data-preval'));
+            if (inputdata && preval != inputdata)
+            {
+              
+
+
+var categoryjson = {
+        'itemname': inputdata,
+        'screen_id_forsearch': screen_id,
+        'accessedfrom': accessedfrom
+       
+    };
+    var json_dataforsplit = JSON.stringify(categoryjson);
+
+
+    $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            data: json_dataforsplit,
+            async: true,
+            contentType: "application/json; charset=utf-8",
+            cache: false,
+            url: url + '/itemsearchservice',
+             timeout: 10000,
+               beforeSend: function()
+                    {
+                        $("#itemssearchpage #loaderforsearch").show();
+                    },
+                    complete: function()
+                    {
+                       $("#itemssearchpage #loaderforsearch").hide();
+                    },
+            success: function(respo) {
+
+               leafResponseforsearchpage(respo);
+               
+            },
+              error: function(jqXHR, exception) {
+
+
+      if (jqXHR.status === 0 || exception === 'timeout') {
+            $('#itemssearchpage #timeoutalertsearchpage').popup({history: false}).popup('open');
+            }
+            else
+            {
+                 $('#itemssearchpage #itemsearcherror').popup({history: false}).popup('open');
+            }
+
+    
+}
+          
+        });
+
+
+
+            }
+        },
+        minLength: 2,
+        select: function(event, ui)
+        {
+            $(this).attr('data-preval', ui.item.label);
+        }
+    });
+ 		 $("#itemssearchpage #loaderforsearch").hide();
+ 
+  }); // ready ends here
+
+
+$(document).on('pageshow', '#itemssearchpage', function(event)
+  {
+   $("#itemssearchpage #sr_input").focus();
+}); // ready ends here
+ </script>
+</div>
+</body>
+</html>

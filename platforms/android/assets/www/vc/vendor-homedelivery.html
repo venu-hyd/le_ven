@@ -1,0 +1,376 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Lot Easy</title>
+    <!-- Stylesheets-->
+    <link href="css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="css/styles.css" rel="stylesheet" media="screen">
+    <link href="css/theme.css" rel="stylesheet" media="screen">
+    <link href="css/fontello.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="css/DateTimePicker.css" />
+	 <link href="css/jquery.autocomplete.css" rel="stylesheet" media="screen">
+	  <link href="css/jquery.autocomplete.thikbox.css" rel="stylesheet" media="screen">
+    <!-- Dependencies-->
+    <!--<script src="http://code.jquery.com/jquery-1.10.2.js"></script>-->
+    <!-- <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>-->
+	
+	
+	 
+    
+   
+	
+	
+   <script type="text/javascript" src="cordova.js"></script>
+   <script type="text/javascript" src="js/url.js"></script>
+	
+      <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+		
+		
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/vendor-homedelivery.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/DateTimePicker.js"></script>
+	<script type="text/javascript" src="js/bigradiobutton.js"></script>
+	
+    <!--<script type="text/javascript" src="js/ValidationJs/jquery.validate.js"></script>-->
+    <!--<script type="text/javascript" src="js/ValidationJs/additional-methods.js"></script>-->
+    <!--<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.3.css" />
+		<script src="js/jquery.mobile-1.4.3.js"></script>-->
+  <script type="text/javascript">
+	 
+	
+	  var hide = document.getElementById('in');
+hide.onfocus = function()
+{
+  hideKeyboard();
+};
+
+
+function hideKeyboard() {
+  //this set timeout 
+  setTimeout(function() {
+  var field = document.createElement('input');
+  field.setAttribute('type', 'text');
+    field.setAttribute('style', 'position:absolute; top: 0px; -webkit-transform: translateY(-9999px); -webkit-user-modify: read-write-plaintext-only; left:0px;');
+  document.body.appendChild(field);
+
+  field.onfocus = function(){
+    setTimeout(function() {
+      field.setAttribute('style', 'display:none;');
+      setTimeout(function() {
+        document.body.removeChild(field);
+        document.body.focus();
+      }, 14);
+    }, 200);
+  };
+  field.focus();
+    }, 50);
+}
+
+  </script>
+</head>
+<body>
+    <div class="DarkBg">
+        <!--Header Section-->
+        <header class="headerWrap">
+		
+				<div class="tpLogoSection">
+                	<a class="tpBN-lt icon-left-open" id="homeiconback"  style="display:block !important"></a>
+					<a id="homeicon" class="tpBN-lt icon-home-1" ></a>
+					<div class="tpPageHeading">
+						<div class="inheadLogo" style="display: block;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">Lot Easy</div>
+					</div>
+					<a id="logout" class="tpBN-rt icon-logout"></a>
+				</div>
+			</header>
+        <!--Time and Date Section-->
+        <section class="headSubDtls">
+					<ul>
+						<li class="theatreName"><label id="vendorname" title="Vendor Name">Vendor Name</label></li>
+						<li class="screenNo"><label id="locationname" title="Vendor Name" style="display: block;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">Location Name</label></li>
+						<li class="dateTime"><label id="vendorusername" title="Vendor Name">User Name</label></li>
+					</ul>
+				</section>
+        <!-- Content Section -->
+        <div class="row-fluid pull-left">
+            <div style="display:none" class="alert alert-error">
+                <h4 id="errMsg">
+                    <strong>Error!</strong> The daily cronjob has failed.
+                </h4>
+                <a href="#" class="alert_close" title="close"></a>
+            </div>
+            <div style="display:none"  class="alert alert-success">
+                <h4 id="successMsg">
+                    <strong>Succcess!</strong> The daily cronjob has suceeded.
+                </h4>
+                <a href="#" class="alert_close" title="close"></a>
+            </div>
+            <div id="homedeliverymenu">
+                <section class="vendorMenu">
+						<!--<h4 class="h4Head text-uppercase text-center">Home Delivery</h4>-->
+						<ul>
+							<li id="hmedelsetupmnu" class="status orderli-new">Home Delivery Setup</li>
+							<!-- <li id="aprvcustmnu"  class="status orderli-viewed">Approve Customers</li>-->
+							<li id="deactivecustmnu" class="status orderli-pickedup">Deactivate Customers</li>
+							<li id="adareastosvcmnu" class="status orderli-accepted">Add areas to service</li>
+							<li id="adrlsfrdlvrymnu" class="status orderli-ready" >Add rules for delivery </li>
+							<li id="availableitems" class="status orderli-pickedup">My Home Delivery Menu</li>
+						</ul>
+					</section>
+            </div>
+            <div class="contentWrap" id="homedeliverysetup">
+                <section class="contentWrap_inner">
+						<h4 class="h4Head text-uppercase text-center">Home Delivery Setup</h4>			
+						<div class="custom-fields stTime fields">
+							<input type="hidden"  id="homedelsetupid" >
+							<input type="text" onkeypress="return RestrictVarchar(this,event,30);"  id="homedelsetupaddress1" placeholder="Address1">
+							<input type="text"  onkeypress="return RestrictVarchar(this,event,30);"  id="homedelsetupaddress2" placeholder="Address2">
+							<input type="text" onkeypress="return RestrictVarchar(this,event,30);"   id="homedelsetupstate" placeholder="State">
+							<input type="text" onkeypress="return RestrictVarchar(this,event,30);"   id="homedelsetupcity" placeholder="City">
+							<input type="text" onkeypress="return RestrictVarchar(this,event,30);"  id="homedelsetuparea" placeholder="Area">
+							<input type="text"  onkeypress="return RestrictVarchar(this,event,30);"  id="homdellocality" placeholder="Locality">
+							<input type="text" onkeypress="return RestrictVarchar(this,event,30);"  id="homedelsetuplandmark" placeholder="Landmark">
+							<input type="tel" onkeypress="return RestrictPhoneNumber(this,event);" id="homedelsetupphone" placeholder="Phone Number">
+							
+							<div class="setTimedelivery">
+								<h5 id="bustimehead" class="h5Head" style="margin-top:20px;">Set Business Timings</h5>
+								<!--<input type="text" id="fromtime" placeholder="Select From Time" autocomplete="off" class="time ui-timepicker-input">-->
+								<div class="setTd-flds">
+									<input type="time" id="homedelsetupdeliveryfromtime1" placeholder="Select From Time1" class="setT-input" data-field="time" readonly >
+									<input type="time" id="homedelsetupdeliverytotime1" placeholder="Select To Time1" data-field="time" class="setT-input2" readonly >
+									<br/>
+									AND
+									<br/>
+									<input type="time" id="homedelsetupdeliveryfromtime2" placeholder="Select From Time2" class="setT-input" data-field="time" readonly >
+									<input type="time" id="homedelsetupdeliverytotime2" placeholder="Select To Time2" data-field="time" class="setT-input2" readonly >
+									<div id="dtBox"></div>
+									<a href="#" id="saveHomedeliverySetup" class="btn btn-primary btn-marg20 FullWidth">Save</a>
+								</div>
+								
+							</div>
+							
+							<div class="FullWidth pull-left" id="divNoHomeDeliveryDates" style="margin-bottom:25px; margin-top:20px;">
+								<h5 class="h5Head">Add No Delivery dates</h5>
+								<!--<input type="text" placeholder="Select Date">-->
+								<div class="addnodeliverydates">
+									<ul>
+										<li class="dt"><input class="nodeliverydate" id="nodeliverydate" type="date"  data-field="date"  placeholder="Date" readonly ></li>
+										<li class="frti"><input  type="time" id="nodeliveryFrom" onkeypress="return restrictPercentAnd(event);" class="picker" placeholder="From" data-field="time" readonly></li>
+										<li class="toti"><input type="time" id="nodeliveryTo" onkeypress="return restrictPercentAnd(event);" class="picker" placeholder="To" data-field="time" readonly></li>
+										 <!--<li><input  type="time" id="nodeliveryBusinessStartTime" class="picker" placeholder="Business Start Time"></li>
+										<li><input type="time" id="nodeliveryBusinessEndTime" class="picker" placeholder="Business End Time"></li>-->
+										<li class="addti"><a href="#" id="addNodeliverydate" class="orgIconCircle24 icon-plus pull-right"></a></li>
+									</ul>
+								</div>
+								
+								<div class="addnodeliverydates">
+									<h5 class="h5Head" style="margin-top:20px;">Existing No Delivery dates</h5>
+									<ul id="noDeliveryDateTimesList">
+										<div class="fullRow pull-left">
+											<li class="dt"><input class="nodeliverydate" type="text" onkeypress="return restrictPercentAnd(event);" placeholder="Date" data-field="date"></li>
+											<li class="frti"><input type="text" class="picker" onkeypress="return restrictPercentAnd(event);" placeholder="From" data-field="time"></li>
+											<li class="toti"><input type="text" class="picker" onkeypress="return restrictPercentAnd(event);" placeholder="To" data-field="time"></li>
+											  <!-- <li><input type="time" class="picker" placeholder="Business Start Time"></li>
+											<li><input type="time" class="picker" placeholder="Business End Time"></li> -->
+											<li><a href="#" class="add-delete orgIconCircle24 icon-plus pull-right"></a></li>
+										</div>
+										<div class="fullRow pull-left">
+											<li class="dt"><input class="nodeliverydate" type="text" placeholder="Date" data-field="date"></li>
+											<li class="frti"><input type="text" class="picker" onkeypress="return restrictPercentAnd(event);" placeholder="From" data-field="time"></li>
+											<li class="toti"><input type="text" class="picker" onkeypress="return restrictPercentAnd(event);" placeholder="To" data-field="time"></li>
+											   <!--<li><input type="time" class="picker" placeholder="Business Start Time"></li>
+											<li><input type="time" class="picker" placeholder="Business End Time"></li>-->
+											<li><a href="#" class="add-delete orgIconCircle24 icon-plus pull-right"></a></li>
+										</div>
+										<div class="fullRow pull-left">
+											<li class="dt"><input class="nodeliverydate" type="text" onkeypress="return restrictPercentAnd(event);" placeholder="Date" data-field="date"></li>
+											<li class="frti"><input type="text" class="picker" onkeypress="return restrictPercentAnd(event);" placeholder="From" data-field="time"></li>
+											<li class="toti"><input type="text" class="picker" onkeypress="return restrictPercentAnd(event);" placeholder="To" data-field="time"></li>
+											  <!-- <li><input type="time" class="picker" placeholder="Business Start Time"></li>
+											<li><input type="time" class="picker" placeholder="Business End Time"></li>-->
+											<li  class="addti"><a href="#" class="add-delete orgIconCircle24 icon-plus pull-right"></a></li>
+										</div>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</section>
+            </div>
+            <div class="contentWrap" id="approvecustomers">
+                <section class="contentWrap_inner">
+                        <h4 class="h4Head text-uppercase text-center">Approve Customers</h4>
+                        <div id="app_customerrecord" class="aproveCust">
+                            <p>
+                            <strong>John Smith</strong><br>
+                                Meridian Soft<br>
+                                Building NO.1, SoftSol Building,<br>
+                                Madhapur,<br>
+                                Hyderabad<br>
+                            </p>
+                            <input id="appCustId" type="hidden" >
+                        </div>
+                </section>
+                <div class="ap-bot">
+                    <aside id="prevcustrec" class="pnbtWrap"><img src="images/icon-prv.png" alt=""/></aside>
+                    <aside class="pnbtWrap mdbt">
+                    <a href="#" id="btnRejectcust" onclick="ApproveOrRejectCustomer(false);" class="btn btn-danger">Reject</a>
+                    <a href="#" id="btnApprovecust" onclick="ApproveOrRejectCustomer(true);"  class="btn btn-success">Approve</a>
+                    </aside>
+                    <aside id="nxtcustrec" class="pnbtWrap nxtbt"><img src="images/icon-arrow-white.png" alt=""/></aside>
+                </div>
+            </div>
+            <div class="contentWrap" id="addareastoservice">
+                <section class="contentWrap_inner addloacationsWrapper">
+						<h4 class="h4Head text-uppercase text-center">Add Locations</h4>
+						<div class="custom-fields stTime fields">
+						<!--<input type="text" id="addState"  placeholder="State">-->
+						
+							<input type="text" id="addCity" onkeypress="return RestrictVarchar(this,event,30);return restrictPercentAnd(event);"  list="lstCity"  placeholder="City"> <!--onkeydown="addCity()" -->
+							<datalist id="lstCity"> </datalist>
+							<input type="text" id="addArea"  onkeypress="return RestrictVarchar(this,event,30);return restrictPercentAnd(event);"  list="lstArea"  onkeydown="addArea()"   placeholder="Area">
+							<datalist id="lstArea"> </datalist>
+							<input type="text" id="addLocation"  onkeypress="return RestrictVarchar(this,event,30);return restrictPercentAnd(event);"  list="lstLocation"   onkeydown="addLocation()"    placeholder="Locality">
+							<datalist id="lstLocation"> </datalist>
+							<a href="#" onclick="AddAreasToService();" class="btn btn-primary FullWidth btn-marg20">Add</a>
+							
+							<div class="selectLocations">
+								<h5 class="h4Head text-uppercase text-center">Selected Locations</h5>
+								<ul id="selectedLocations" class="fullRow pull-left">
+									<!--<li><input type="checkbox" class="inp"><p>Banjara Hills</p></li>
+									<li><input type="checkbox" class="inp"><p>Banjara Hills</p></li>
+									<li><input type="checkbox" class="inp"><p>Banjara Hills</p></li>
+									<li><input type="checkbox" class="inp"><p>Banjara Hills</p></li>
+									<li><input type="checkbox" class="inp"><p>Banjara Hills</p></li>
+									<li><input type="checkbox" class="inp"><p>Banjara Hills</p></li>-->
+								</ul>
+								<!-- Need to use table instead of li's to get proper structure -->
+								<!--<table id="existingLocations" class="fullRow pull-left">
+								<tr>
+								<td><input type='checkbox'  id='area_32' onclick='ActivateDeactivateArea(32);' class='inp'/>Pantaloons-Begumpet-Hyderabad</td>
+								<td><input type='checkbox' checked id='area_33' onclick='ActivateDeactivateArea(33);' class='inp'/>GVK Mall-Panjagutta-Hyderabad</td>
+								<td><input type='checkbox'  id='area_34' onclick='ActivateDeactivateArea(34);' class='inp'/>Inorbit Mall-Hitech City-Hyderabad</td>
+								</tr>
+								<tr>
+								<td><input type='checkbox' checked id='area_36' onclick='ActivateDeactivateArea(36);' class='inp'/>Eseva-Ramnagar-Secundrabad</td>
+								<td><input type='checkbox' checked id='area_81' onclick='ActivateDeactivateArea(81);' class='inp'/>GoSeva-Ramnagar-Secundrabad</td>
+								<td><input type='checkbox' checked id='area_82' onclick='ActivateDeactivateArea(82);' class='inp'/>GVK Mall-Panjagutta-Hyderabad</td>
+								</tr>
+								<tr>
+								<td><input type='checkbox' checked id='area_83' onclick='ActivateDeactivateArea(83);' class='inp'/>GVK Mall-Panjagutta-Hyderabad</td>
+								<td><input type='checkbox' checked id='area_85' onclick='ActivateDeactivateArea(85);' class='inp'/>JNTU-Kukatpally-Hyderabad</td>
+								<td><input type='checkbox' checked id='area_86' onclick='ActivateDeactivateArea(86);' class='inp'/>GVK Mall-Panjagutta-Hyderabad</td>
+								</tr>
+								<tr>
+								<td><input type='checkbox' checked id='area_87' onclick='ActivateDeactivateArea(87);' class='inp'/>GVK Mall-Panjagutta-Hyderabad</td>
+								<td><input type='checkbox' checked id='area_88' onclick='ActivateDeactivateArea(88);' class='inp'/>GaramMasala-Gachibowli-Hyderabad</td>
+								<td><input type='checkbox' checked id='area_89' onclick='ActivateDeactivateArea(89);' class='inp'/>Pantaloons-Begumpet-Hyderabad</td>
+								</tr>
+								</table>-->					
+							</div>
+						</div>
+					</section>
+            </div>
+            <div class="contentWrap" id="deactivatecustomer">
+                <section class="contentWrap_inner addloacationsWrapper">
+						<h4 class="h4Head text-uppercase text-center">Deactivate Customers</h4>
+						<div id="divSearchCustomers" class="custom-fields">
+							<h5 class="h5Head">Search</h5>
+							<!-- <input type="text" placeholder="Select Date">-->
+							<ul class="sdateTime">
+								<li><input  id="custNameSearch" onkeypress="return RestrictVarchar(this,event,30);" type="text" placeholder="Customer Name"></li>
+								<li><input  type="tel" id="custPhoneSearch" onkeypress="return RestrictPhoneNumber(this,event);" placeholder="Customer Phone"></li>
+								<a href="#" id="btnSearchCustomers" class="btn btn-primary FullWidth btn-marg20">Search</a>
+							</ul>
+						</div>
+						<div class="selectLocations custNam">
+							<ul id="activateCustList">
+								<li><p><strong>No records available to show</strong></p></li>
+								 <!--<li><input type="checkbox" class="inp"><p><strong>John Smith</strong><br>Meridian Soft, Building NO.1, SoftSol Building, Madhapur, Hyderabad - 500 001, Ph: 9292012345</p></li>
+								  <li><input type="checkbox" class="inp"><p><strong>John Smith</strong><br>Meridian Soft, Building NO.1, SoftSol Building, Madhapur, Hyderabad - 500 001, Ph: 9292012345</p></li>
+								   <li><input type="checkbox" class="inp"><p><strong>John Smith</strong><br>Meridian Soft, Building NO.1, SoftSol Building, Madhapur, Hyderabad - 500 001, Ph: 9292012345</p></li>
+									<li><input type="checkbox" class="inp"><p><strong>John Smith</strong><br>Meridian Soft, Building NO.1, SoftSol Building, Madhapur, Hyderabad - 500 001, Ph: 9292012345</p></li>
+									 <li><input type="checkbox" class="inp"><p><strong>John Smith</strong><br>Meridian Soft, Building NO.1, SoftSol Building, Madhapur, Hyderabad - 500 001, Ph: 9292012345</p></li>
+									  <li><input type="checkbox" class="inp"><p><strong>John Smith</strong><br>Meridian Soft, Building NO.1, SoftSol Building, Madhapur, Hyderabad - 500 001, Ph: 9292012345</p></li>-->
+							</ul>
+						</div>
+					</section>
+            </div>
+            <!---------- HOME DELIVERY SECTION --->
+            <div class="contentWrap" id="homedeliveryrules">
+                <section class="contentWrap_inner homedeliver_rules_wrap">
+					<input id="hdnDeliveryRule" type="hidden" value="">
+                    	<h4 class="h4Head text-uppercase text-center">Home Delivery Rules</h4>
+                        <ul class="hlv_slt_wrap">
+                            <li  onclick="StandardDeliveryRule();" ><label class="pull-left tp_mrgin_mins3"><input type="radio" id="rdStdDelivery" name="rule" class="radio bigradio pull-left " onclick="StandardDeliveryRule();"></label><p>Standard Rule</p></li>
+							<li onclick="CustomDeliveryRule();" ><label class="pull-left tp_mrgin_mins3"><input type="radio" id="rdCustoDelivery" name="rule" class="radio bigradio pull-left" onclick="CustomDeliveryRule();"></label><p>Custom Rule</p></li>
+                        </ul>
+                        
+                        <div class="hlv_slt_cont_wrap">
+                            <div class="fieldsTable custom-fields">
+                                <table width="100%" id="tblcustomrule" border="0" cellspacing="0" cellpadding="0">
+                                  <tr>
+                                    <td align="left" valign="middle" width="33%"><label class="fieldHead">Bill Amount</label></td>
+                                    <td align="left" valign="middle" width="33%"><label class="fieldHead">Delivery Charge</label></td>
+                                    <td align="left" valign="middle" width="33%"><label class="fieldHead">Delivery Tax</label></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="left" valign="middle"><input id="deliveryBillAmount" onkeypress="return isFloatNumber();" type="number" placeholder="0.00"></td>
+                                    <td align="left" valign="middle"><input id="deliveryCharge" onkeypress="return isFloatNumber();" type="number"  placeholder="0.00"></td>
+                                    <td align="left" valign="middle"><input id="deliveryTax" onkeypress="return isFloatNumber();" type="number"  placeholder="0.00"></td>
+                                  </tr>
+                                </table>
+                                
+                                <table width="100%" id="tblstdrule" border="0" cellspacing="0" cellpadding="0">
+                                  <tr>
+                                    <td align="left" valign="middle" width="50%"><label class="fieldHead">Delivery Charge</label></td>
+                                    <td align="left" valign="middle" width="50%"><label class="fieldHead">Delivery Tax</label></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="left" valign="middle"><input id="deliverChargeStd" onkeypress="return isFloatNumber(event);" type="number" placeholder="0.00"></td>
+                                    <td align="left" valign="middle"><input id="deliveryTaxStd" onkeypress="return isFloatNumber(event);" type="number" placeholder="0.00"></td>
+                                  </tr>
+                                </table>
+								
+                                <a  id="savedeliveryrule" onclick="SaveHomeDeliveryRule();" class="btn btn-primary btn-marg20 FullWidth">Save</a>
+								
+                            </div>
+                        </div>
+                    </section>
+            </div>
+            <div class="contentWrap">
+            	<div class="contentWrap_inner">
+            	<a id="Back" class="btn btn-secondary btn-marg20 FullWidth">Back</a>
+                </div>
+            </div>
+            <!---------- HOME DELIVERY SECTION  END--->
+        </div>
+		
+    </div>
+     <!--error page for network connection-->
+	<div id="errornet1"  class="emptyMsg" style="display:none" >
+							<div class="emptyMsg_inner">
+								Please check your network connectivity and try again 
+								<center><button type="button"class="btn btn-primary" onclick="network1()">Ok</button></center>
+								
+							</div>
+	</div>
+			   <!--error page for timeout error-->
+	<div id="errornet2"  class="emptyMsg" style="display:none" >
+							<div class="emptyMsg_inner">
+								Unable to connect to Lot Easy. Please check your network connectivity and try again.
+								<center><button type="button"class="btn btn-primary" onclick="network()">Ok</button></center>
+							
+							</div>
+	</div>
+    <!----Loading Image--------->
+    <div id="loader" class="loaderMain">
+        <div class="loading_inner">
+            <img src="images/loader.gif" /></div>
+    </div>
+</body>
+</html>
