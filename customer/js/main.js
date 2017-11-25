@@ -55,8 +55,8 @@ $(document).on("click", "#mainpage .getStarted", function(event) {
 $("#loader").hide();
         },
         success: function(response) {
-            console.log(response);
-            console.log(JSON.parse(response));
+            console.log(response.user_type);
+            
                 if(response)
                 {
             if (!response.user_type) {
