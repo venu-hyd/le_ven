@@ -147,6 +147,7 @@
                 var deviceVersion = '';
                 var deviceModel = '';
                document.addEventListener("deviceready", function() {
+                   console.log(device);
                 UUID = device.uuid;
                 deviceName = device.name;
                 deviceVersion = device.version;

@@ -70,6 +70,7 @@ function submitDataforcreateaccount()
     },
     success: function(response)
     {
+      console.log(response);
       var userType = response.user_type;
       
       if (userType === 'customer')
