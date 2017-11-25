@@ -7,7 +7,7 @@
     <author email="info@dimenteka.com" href="http://cordova.io">
         Dimenteka Mobile Dev Team
     </author>
-    <content src="index.html" />
+    <content src="./customer/customer.html" />
     <access origin="http://google.com" />
     <access origin="https://google.com" />
     <access origin="http://maps.google.com" />
