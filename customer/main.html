@@ -44,7 +44,7 @@
 .ui-autocomplete { position: absolute; cursor: default;z-index:30 !important;}  
 .ui-front { z-index: 9999; }
 .ui-page {
-  -webkit-backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
   
   .writecomments{
     height: 50px;
@@ -140,9 +140,8 @@
                     <div class="loading_inner"><img src="images/loader.gif"/></div>
             </div>
             <script type="text/javascript" charset="utf-8">
-                
-              
-                var UUID = '';
+                $(document).ready(function(){
+                    var UUID = '';
                 var deviceName = '';
                 var deviceVersion = '';
                 var deviceModel = '';
@@ -229,10 +228,13 @@
               
                }, false);
                }, true);       
-                      
+                    
+                })
+              
+                 
                </script>
                
-         <script type="text/javascript">
+<script type="text/javascript">
    
    $("#mainpage").on("pagebeforeshow", function(event)
    {
