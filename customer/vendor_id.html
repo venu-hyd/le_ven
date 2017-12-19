@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+	<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+      <title>OrderMySnack</title>
+      <link rel="shortcut icon" href="favicon.ico">
+      <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css">
+      <link rel="stylesheet" href="css/jqm-demos.css">
+      <link rel="stylesheet" href="css/homedelivery_styles.css">
+      <link rel="stylesheet" href="css/fontello.css">
+      <link rel="stylesheet" href="css/customer_styles.css">
+   
+     <script type="text/javascript" src="cordova.js"></script>        
+      <script src="js/jquery.js"></script>
+      <script src="js/jquery.mobile-1.4.5.min.js"></script>
+      <script type="text/javascript" src="js/jquery.validate.js"></script>
+      <script type="text/javascript" src="js/additional-methods.js"></script>
+      <script type="text/javascript" src="js/jquery-ui.js"></script>  
+      <script type="text/javascript" src="js/main.js"></script>  
+      <script type="text/javascript" src="js/custom/url.js"></script>  
+       <script type="text/javascript" src="js/allfiles.js"></script>  
+     
+      <script type="text/javascript" src="js/forbackbuttons.js"></script>
+                          
+     
+     
+
+  <script type="text/javascript" charset="utf-8">
+  
+
+  var UUID = '';
+  var deviceName = '';
+  var deviceVersion = '';
+  var deviceModel = '';
+ document.addEventListener("deviceready", function() {
+  UUID = device.uuid;
+  deviceName = device.name;
+  deviceVersion = device.version;
+  deviceModel = device.model;
+
+ document.addEventListener("backbutton", function(e) {
+
+ 
+ 
+
+         if($.mobile.activePage.is('#vendoridpage')) // vendor_id.html
+       {  
+          backbuttoncallforvendoridpage();
+       }
+       else
+       {
+        return false;
+       }
+      
+ 
+
+
+ }, false);
+ }, true);       
+        
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+  </script>
+   </head>
+
+
+<body> 
+	<div data-role="page" class="ordermysnack" data-quicklinks="true" id="vendoridpage" data-dom-cache="false">
+	
+        <!-- Content Start -->
+        <div role="main" class="ui-content oms-content">
+        	<div class="logoFull starlogoMarg"><img src="images/logo.png"/></div>
+            <form id="vendorform" name="vendorform">    
+            <div class="createAccountWrap">
+                <div class="row-fluid">
+                    <label class="fieldLabel">Verification Pin</label>
+                    <div class="insideInput"><input type="tel" placeholder="Verification Pin" id="vendorpin" name="vendorpin" onkeypress="return nospecialCharacters(event)" required><a href="#" class=""></a></div>
+                </div>
+                <div class="row-fluid">
+                    <label class="fieldLabel">Captcha</label>
+                    <input type="tel" id="loginCaptchaCode" name="loginCaptchaCode" placeholder="CaptchaCode" required>
+                     <label  class="cmismatch">Captcha Mismatch</label>
+                </div>
+                <div class="capthaWrpper">
+                	<div class="capthaleft">
+                    	<label class="fieldLabel captha-img" id="randomfield" >Captcha</label>
+                    </div>
+                    <div class="captharight">
+                    	<div type="button" class="iconbtn-refresh" onclick="DrawCaptcha();">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                  <i class="iTerms" style="margin-top: -12px;padding:8px;">By Clicking Submit, I agree to the <a  id="ventermsandc" href="http://loteasy.com:8080/customer/vendorDenmark.html">Terms &amp; Conditions</a></i>
+
+
+                  
+                	<button class="sbmtbtn btn btn-a">Submit</button>
+                </div>
+				 <!--copy rights-->
+				<div class="footerCopywrite">
+					<div class="pTag">All Rights Reserved @ 2016 Lot Easy - Dimenteka Business Solutions Pvt. Ltd.</div>
+				</div>
+            </div> 
+                 </form>
+            <!-- Full Name Help -->
+            <div data-role="popup"   data-history="false"   id="fullnameHelp" class="ui-content" data-theme="a">
+            	<div class="popup_inner popup_sm">
+                	<div class="popup_content">
+                    	<i class="pop_tooltipIcon icon-help"></i>
+                    	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                    <div class="popup_footer">
+                    	<a>Ok</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mobile Number Help -->
+            <div data-role="popup"  data-history="false"   id="mobilenumberHelp" class="ui-content" data-theme="a">
+            	<div class="popup_inner popup_sm">
+                	<div class="popup_content">
+                    	<i class="pop_tooltipIcon icon-help"></i>
+                    	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                    <div class="popup_footer">
+                    	<a>Ok</a>
+                    </div>
+                </div>
+            </div>
+
+
+                <!-- Mobile Number Help -->
+            <div data-role="popup"  data-history="false"      id="vendoridpopupp" class="ui-content" data-theme="a">
+                <div class="popup_inner popup_sm">
+                    <div class="popup_content">
+                        
+                        <p>Please enter correct Verification Pin to proceed </p>
+                    </div>
+                    <div class="popup_footer vendoridclosepopupe">
+                        <a>Ok</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+             <div data-role="popup" data-history="false"  id="nonetcheckconnvendorid" data-dismissible="false" class="ui-content" data-theme="a">
+            <div class="popup_inner popup_sm">
+                <div class="popup_content" style="text-align:center;">
+                    <p class="">Please check your network connectivity and try again</p>
+                </div>
+                <div class="popup_footer nonetconncheckconnclsoe">
+                        <a class="">Ok</a>
+                </div>
+            </div>
+        </div>
+
+
+          <div data-role="popup" id="errorcheckconnvendorid" data-history="false"  data-dismissible="false" class="ui-content" data-theme="a">
+            <div class="popup_inner popup_sm">
+                <div class="popup_content" style="text-align:center;">
+                    <p class="">Oops! Please try again</p>
+                </div>
+                <div class="popup_footer errornonetconncheckconnclsoe">
+                        <a class="">Ok</a>
+                </div>
+            </div>
+        </div>
+
+
+
+             <div data-role="popup"  data-history="false"    id="deactivated" class="ui-content" data-theme="a">
+                <div class="popup_inner popup_sm">
+                    <div class="popup_content">
+                        
+                        <p>User Deactivated</p>
+                    </div>
+                    <div class="popup_footer vendordeactivated">
+                        <a>Ok</a>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+
+  <div id="loader" class="loaderMain">
+                    <div class="loading_inner"><img src="images/loader.gif"/></div>
+            </div>
+     
+   
+
+      <script type="text/javascript">
+
+window.onload = function() {
+    if (!window.jQuery) {  
+        window.location.replace('main.html');
+        return false;
+    } 
+}
+
+
+
+$(document).ready(function () {
+    window.opener=null;
+DrawCaptcha();
+
+});
+
+
+
+
+var UUID = '';
+var vendor_id = '';
+var mobile = '';
+$("#vendoridpage").on("pagebeforeshow", function(event) {
+    
+    if (typeof vendorloaded == 'undefined') {
+        $.getScript('js/vendor.js', function(data, textStatus, jqxhr) {
+            vendoridpagefunctionality();
+        });
+    } else {
+        vendoridpagefunctionality();
+    }
+
+    $.ajax({
+            url: "https://geoip-db.com/jsonp",
+            jsonpCallback: "callback",
+            dataType: "jsonp",
+            success: function( location ) {
+          //  alert(location.country_name);
+ localStorage.setItem("locationbasednamevendor",location.country_name);
+
+
+
+
+
+
+			
+			
+            }
+        }); 
+ 
+
+    UUID = getParameterByName('UUID');
+    vendor_id = getParameterByName('vendor_id');
+    mobile = getParameterByName('mobile');
+  
+    $('.cmismatch').hide();
+     //DrawCaptcha();
+
+    event.stopImmediatePropagation();
+    event.preventDefault();
+    return false;
+});
+
+</script>
+</div>
+</body>
+</html>

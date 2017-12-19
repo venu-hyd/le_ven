@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>OrderMySnack</title>
+    <link rel="shortcut icon" href="favicon.ico">    
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css">
+    <link rel="stylesheet" href="css/jqm-demos.css">
+    <link rel="stylesheet" href="css/homedelivery_styles.css">
+    <link rel="stylesheet" href="css/fontello.css">
+      <script src="js/jquery.js"></script>
+      <script src="js/jquery.mobile-1.4.5.min.js"></script>
+     <script type="text/javascript" src="js/jquery.validate.js"></script>
+    <script type="text/javascript" src="js/additional-methods.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>  
+<script type="text/javascript" src="js/vendor_for_vendor.js"></script>
+      <script type="text/javascript" src="js/custom/url.js"></script>  
+<script type="text/javascript" src="cordova.js"></script>
+      <style>
+    .cmismatch {
+    background-color: red;
+    }
+     .ui-page 
+ {
+-webkit-backface-visibility: hidden !important;
+}
+
+    </style>
+</head>
+<script type="text/javascript">
+      
+  var deviceName ;
+  var deviceVersion;
+  var deviceModel;
+      
+document.addEventListener("deviceready", function(){
+
+
+  deviceName = device.name;
+  deviceVersion = device.version;
+  deviceModel = device.model;
+
+
+         
+           document.addEventListener("backbutton", function(e){
+
+         
+       if($.mobile.activePage.is('#vendoridpageforvendor'))  //main.html
+       {
+      //    backbuttoncallforvendoridpageforvendor();
+       }
+
+         
+    
+    }, false);
+      
+ },true);
+ 
+
+   </script>
+
+
+<body>
+	<div data-role="page" class="ordermysnack" data-quicklinks="true" id="createaaccountpage" data-dom-cache="false">
+	 <form id="createaccount" name="createaccount">	
+        <!-- Content Start -->
+        <div role="main" class="ui-content oms-content">
+        	<div class="pageMidLogo"><img class="logoFull" src="images/logo.png"/><br><br></div>
+            <div class="createAccountWrap">
+            	<h3 class="h3_head">One-Time Registration</h3>
+            	<div class="row-fluid">
+                    <label class="fieldLabel">Full Name</label>
+                    <div class="insideInput"><input type="text" name="name" id="name" placeholder="Full Name" required/><a href="#fullnameHelp"  data-rel="popup" data-position-to="window" class="tooltipIcon icon-help"></a></div>
+                    <!--<i class="iLabel">SMS will be sent register mobile number further verification</i>-->
+                </div>
+                <div class="row-fluid">
+                    <label class="fieldLabel">Mobile Number</label>
+                    <div class="insideInput"><input type="tel"  maxlength="10" name="mobile" id="mobile" placeholder="Mobile Number" required/><a href="#mobilenumberHelp"  data-rel="popup" data-position-to="window" class="tooltipIcon icon-help"></a></div>
+                    <i class="iLabel">SMS verification will be sent to this mobile <br><br>By Clicking Submit, I agree to the <span style ="color:red"  id="ventermsandc">Terms &amp; Conditions</span></i>
+                </div>
+                <div class="row-fluid">
+                	<button class="btn btn-a createaccountsbtbtn">Submit</button>
+                    <!--<input type="submit" value="Submit" class="btn btn-a"/> -->
+                </div>
+				 <!--copy rights-->
+				<div class="footerCopywrite">
+					<div class="pTag">All Rights Reserved @ 2016 Lot Easy - Dimenteka Business Solutions Pvt. Ltd.</div>
+				</div>
+            </div>
+           
+
+            <!-- Full Name Help -->
+            <div data-role="popup"  data-history="false"    id="fullnameHelp" class="ui-content" data-theme="a">
+            	<div class="popup_inner popup_sm">
+                	<div class="popup_content">
+                    	<i class="pop_tooltipIcon icon-help"></i>
+                    	<p class="align-center">Please provide your First Name and Last Name, this will help us to serve you better.</p>
+                    </div>
+                    <div class="popup_footer fullnamepopup">
+                    	<a>Ok</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mobile Number Help -->
+            <div data-role="popup"   data-history="false"    id="mobilenumberHelp" class="ui-content" data-theme="a">
+            	<div class="popup_inner popup_sm">
+                	<div class="popup_content">
+                    	<i class="pop_tooltipIcon icon-help"></i>
+                    	<p class="align-center">Please provide your mobile number for one time user verification and communication from Lot Easy and Service providers.</p>
+                    </div>
+                    <div class="popup_footer mobilenumberpopup">
+                    	<a>Ok</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+ </form>
+<script type="text/javascript">
+var UUID = '';
+var firsttimelogin = '';
+$("#createaaccountpage").on("pagebeforeshow", function(event)
+{
+	    
+
+
+
+      if (typeof createaccountjsloaded == 'undefined') {
+        $.getScript('js/createaccount.js', function(data, textStatus, jqxhr) {
+            createaccountvalidate();
+        });
+    } else {
+        createaccountvalidate();
+    }
+
+
+
+    
+  UUID = getParameterByName('UUID');
+  deviceVersion = getParameterByName('deviceVersion');
+  deviceModel = getParameterByName('deviceModel');
+
+  event.stopImmediatePropagation();
+  
+  event.preventDefault();
+  return false;
+}); 
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+$(document).on('click', '#createaaccountpage #ventermsandc', function(event) {
+
+ window.open('http://14.140.147.93:9696/customer/vendortermsandconditions.html', '_blank', 'location=no');
+  event.stopImmediatePropagation();
+                            event.preventDefault();
+                            return false;
+});
+
+
+</script>
+</div>
+</body>
+</html>
