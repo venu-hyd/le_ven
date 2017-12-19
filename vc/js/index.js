@@ -10,8 +10,29 @@ function conversion(time){
     var milliSeconds = _date.getTime()
     
     var Denmark_Time = new Date(milliSeconds - (270*60*1000));
-
-  var Finally_denmark_time=  Denmark_Time.getHours()+":"+Denmark_Time.getMinutes()+":"+Denmark_Time.getSeconds()
+var hours=parseInt( Denmark_Time.getHours());
+var minutes=parseInt( Denmark_Time.getMinutes());
+var seconds=parseInt( Denmark_Time.getSeconds());
+if ( hours < 10 ) {
+    hours= "0" + hours;
+} else {
+ hours= hours;
+}
+if ( minutes < 10 ) {
+minutes= "0" + minutes;
+} 
+else 
+{
+ minutes= minutes;
+}
+if ( seconds < 10 ) {
+seconds= "0" + seconds;
+} 
+else {
+seconds= seconds;
+}
+                
+  var Finally_denmark_time=  hours+":"+minutes+":"+seconds
  
   return Finally_denmark_time;
 }

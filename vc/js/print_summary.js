@@ -150,7 +150,7 @@ $(document).ready(function()
 	                        }
 
 	                        else if(discount_div.indexOf("Rs") > -1) {
-                             rupeeappend = '<span class="WebRupee">&#x20B9;</span>';
+                             rupeeappend = '<span class="WebRupee"></span>';
 	                        }
 
 
@@ -238,7 +238,7 @@ $(document).ready(function()
 					var roundofvalueinwords = toWords(forwords);
 
 
-				$("#amountInWords").html(roundofvalueinwords+ 'Only');
+				//$("#amountInWords").html(roundofvalueinwords+ 'Only');
 				
 				
 				// For Tin
