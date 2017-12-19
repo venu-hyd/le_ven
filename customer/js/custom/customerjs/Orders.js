@@ -1,3 +1,4 @@
+localStorage.setItem('locationbasednamevendor', 'Denamrk');
 function getqueryByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -414,7 +415,7 @@ if(localStorage.getItem('locationbasednamevendor')!='India'){
 
 
 
-	response.vendors.T1[0].data.tax_details[response.vendors.T1[0].data.tax_order[2]]=tax_contains_value;
+	response.vendors.T1[0].data.tax_details[response.vendors.T1[0].data.tax_order[4]]=tax_contains_value;
 	response.vendors.T1[0].data.tax_details.total=parseFloat( response.vendors.T1[0].data.tax_details["Cost"]+tax_contains_value).toFixed(2);
 	
 	
@@ -711,7 +712,7 @@ for (var l = 0; l < quantity; l++) {
 	var commentWrap = ' <div class="commentWrap">\
                         	<i class="iLabel taxeslabel">Note: Total Amount is inclusive of taxes and charges, as applicable for each individual item</i>\n\
                         	<textarea class="writecomments" data-role="none"   maxlength="150" placeholder="Write Comments"></textarea>\n\
-							<i class="iTerms" id="ventermsandc">By Clicking Confirm Order I agree to the   <a>Terms &amp; Conditions</a></i>\n\
+							<i class="iTerms" id="ventermsandc">By Clicking Confirm Order I agree to the   <a href="http://loteasy.com:8080/customer/vendorDenmark.html">Terms &amp; Conditions</a></i>\n\
                         </div>';
 
 
@@ -889,7 +890,7 @@ $(document).on('click', '#customerpage .confirmorder', function(event) {
         ordersplitjson.vendors.T1[0].data.tax_details.total=parseFloat( ordersplitjson.vendors.T1[0].data.tax_details["Cost"]+tax_contains_value);
         
         ordersplitjson.vendors.T1[0].data.orderinfo[0].taxdetails["total"]=parseFloat( ordersplitjson.vendors.T1[0].data.tax_details["Cost"]+tax_contains_value);
-        ordersplitjson.vendors.T1[0].data.orderinfo[0].taxdetails[ordersplitjson.vendors.T1[0].data.tax_order[2]]=tax_contains_value;
+        ordersplitjson.vendors.T1[0].data.orderinfo[0].taxdetails[ordersplitjson.vendors.T1[0].data.tax_order[4]]=tax_contains_value;
     
         
     
@@ -1366,10 +1367,10 @@ $('#customerpage #custpageerrorlabel').hide();
     });  
 
 
-$(document).on('click', '#customerpage #ventermsandc', function(event) {
+// $(document).on('click', '#customerpage #ventermsandc', function(event) {
 
- window.open('http://loteasy.com:8080/customer/vendortermsandconditions.html', '_blank', 'location=no');
-  event.stopImmediatePropagation();
-                            event.preventDefault();
-                            return false;
-}); 
+//  window.open('http://loteasy.com:8080/customer/vendortermsandconditions.html', '_blank', 'location=no');
+//   event.stopImmediatePropagation();
+//                             event.preventDefault();
+//                             return false;
+// }); 
